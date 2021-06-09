@@ -7,11 +7,13 @@ from joblib import load
 from numpy import NaN, array
 from pandas import DataFrame, to_datetime, concat
 from oauth2client.service_account import ServiceAccountCredentials
+from codeguru_profiler_agent import with_lambda_profiler
 
 filterwarnings("ignore")
 SSM_CLIENT = client("ssm")
 concatenated_data_frame = DataFrame()
 PARAM_NAME = environ['CREDENTIALS']
+CODE_GURU_PROFILING_GROUP = environ['CODE_GURU_PROFILING_GROUP']
 SCOPE = [
     "https://spreadsheets.google.com/feeds",
     "https://www.googleapis.com/auth/drive"
@@ -83,7 +85,7 @@ def concatenate_google_spreadsheets(google_cloud_spreadsheets):
 
 def clean_data():
     blood_glucose_dataset = concatenated_data_frame.copy()
-    concatenated_data_frame.drop(columns=[1, 3, 4, 5, 6], axis=1, inplace=True)
+    blood_glucose_dataset.drop(columns=[1, 3, 4, 5, 6], axis=1, inplace=True)
     blood_glucose_dataset.columns = ["DATETIME", "BLOOD_GLUCOSE"]
     blood_glucose_dataset["BLOOD_GLUCOSE"] = blood_glucose_dataset[
         "BLOOD_GLUCOSE"].replace(["LOW"], 2.2)
@@ -94,9 +96,8 @@ def clean_data():
             "float64")
     blood_glucose_dataset["DATETIME"] = blood_glucose_dataset[
         "DATETIME"].str.replace('at', '')
-    ##### Profilers infor to_datetime takes 89 % of time, for more infor https://stackoverflow.com/questions/32034689/why-is-pandas-to-datetime-slow-for-non-standard-time-format-such-as-2014-12-31
     blood_glucose_dataset["DATETIME"] = to_datetime(
-        blood_glucose_dataset["DATETIME"])
+        blood_glucose_dataset["DATETIME"], infer_datetime_format=True)
     blood_glucose_dataset.replace(r'', NaN, inplace=True)
     blood_glucose_dataset.fillna(0, inplace=True)
     blood_glucose_time_series = down_sample(dataset=blood_glucose_dataset,
@@ -116,6 +117,7 @@ def predict(model_name, x, return_dict):
     return_dict[model_name] = model.predict(x)
 
 
+@with_lambda_profiler(profiling_group_name=CODE_GURU_PROFILING_GROUP)
 def handler(_, __):
 
     credentials = ServiceAccountCredentials.from_json_keyfile_dict(
