@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "@aws-cdk/core";
-import { BackendStack } from "../lib/iac-stack";
+import { BackendStack } from "../lib/backend-stack";
 
 import { StrictBuilder } from "builder-pattern";
 import { Backend } from "../lib/StackConfigs";
