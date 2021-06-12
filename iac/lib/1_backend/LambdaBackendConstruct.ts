@@ -3,6 +3,7 @@ import { Code, Function, Handler, Runtime } from "@aws-cdk/aws-lambda";
 import { ManagedPolicy, Policy, PolicyStatement } from "@aws-cdk/aws-iam";
 import { Topic } from "@aws-cdk/aws-sns";
 import { ComputePlatform, ProfilingGroup } from "@aws-cdk/aws-codeguruprofiler";
+import { SmsSubscription } from "@aws-cdk/aws-sns-subscriptions";
 export interface BackendConfigDecorator extends StackProps {
   readonly codeLocation: string;
   readonly solution: string;
@@ -10,6 +11,9 @@ export interface BackendConfigDecorator extends StackProps {
   readonly parameterStoreCredentialsGoogle: string;
   readonly timeout: number;
   readonly environment: string;
+  readonly profilingGroupsPermissions: string;
+  readonly predictingLambdaExportName: string;
+  readonly mobileNumber: string;
 }
 
 export class LambdaBackendConstruct extends Construct {
@@ -29,13 +33,13 @@ export class LambdaBackendConstruct extends Construct {
     );
     // =========================================
     //
-    //  SNS topic creation
+    //  SNS topic creation and subscription
     //
     // =========================================
     const topic = new Topic(this, `${props.solution}-sns-topic`, {
       displayName: "BLOOD_GLUCOSE_CRIT",
     });
-
+    topic.addSubscription(new SmsSubscription(props.mobileNumber));
     // =========================================
     //
     //  Lambda function creation
@@ -50,7 +54,7 @@ export class LambdaBackendConstruct extends Construct {
       memorySize: props.memorySize,
       environment: {
         CREDENTIALS: parameterStoreCredentialsGoogle,
-        SNS: `${topic.topicName}`,
+        SNS: `${topic.topicArn}`,
         CODE_GURU_PROFILING_GROUP: profilingGroup.profilingGroupName,
       },
       timeout: Duration.seconds(props.timeout),
@@ -92,9 +96,7 @@ export class LambdaBackendConstruct extends Construct {
     //
     // =========================================
     predictingLambda.role?.addManagedPolicy(
-      ManagedPolicy.fromAwsManagedPolicyName(
-        "AmazonCodeGuruProfilerAgentAccess"
-      )
+      ManagedPolicy.fromAwsManagedPolicyName(props.profilingGroupsPermissions)
     );
     profilingGroup.grantPublish(predictingLambda);
     // =========================================
@@ -102,9 +104,11 @@ export class LambdaBackendConstruct extends Construct {
     //  Outputs, topic arn and function arn
     //
     // =========================================
-    new CfnOutput(this, `${props.solution}-arn`, {
+    const lambdaArn = new CfnOutput(this, `${props.solution}-arn`, {
       value: predictingLambda.functionArn,
+      exportName: props.predictingLambdaExportName,
     });
+    lambdaArn.overrideLogicalId(props.predictingLambdaExportName);
     new CfnOutput(this, `${props.solution}-topic-arn`, {
       value: topic.topicArn,
     });

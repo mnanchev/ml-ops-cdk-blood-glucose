@@ -3,6 +3,7 @@ import {
   BackendConfigDecorator,
   LambdaBackendConstruct,
 } from "./1_backend/LambdaBackendConstruct";
+import { Function } from "@aws-cdk/aws-lambda";
 import { ManagedPolicy } from "@aws-cdk/aws-iam";
 
 export class BackendStack extends cdk.Stack {
@@ -13,6 +14,6 @@ export class BackendStack extends cdk.Stack {
     //  Backend Architecture Creation
     //
     // =========================================
-    new LambdaBackendConstruct(this, id, props);
+    const backend = new LambdaBackendConstruct(this, id, props);
   }
 }
