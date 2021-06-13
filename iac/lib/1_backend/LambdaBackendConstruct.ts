@@ -4,6 +4,9 @@ import { ManagedPolicy, Policy, PolicyStatement } from "@aws-cdk/aws-iam";
 import { Topic } from "@aws-cdk/aws-sns";
 import { ComputePlatform, ProfilingGroup } from "@aws-cdk/aws-codeguruprofiler";
 import { SmsSubscription } from "@aws-cdk/aws-sns-subscriptions";
+import { Rule, Schedule } from '@aws-cdk/aws-events';
+import { LambdaFunction } from "@aws-cdk/aws-events-targets";
+
 export interface BackendConfigDecorator extends StackProps {
   readonly codeLocation: string;
   readonly solution: string;
@@ -112,5 +115,9 @@ export class LambdaBackendConstruct extends Construct {
     new CfnOutput(this, `${props.solution}-topic-arn`, {
       value: topic.topicArn,
     });
+    const rule = new Rule(this, 'Rule', {
+      schedule: Schedule.expression('rate(5 minutes)')
+    });
+    rule.addTarget(new LambdaFunction(predictingLambda))
   }
 }
