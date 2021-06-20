@@ -198,4 +198,7 @@ def handler(event, context):
     if float(current_blood_glucose) < 3.7:
         message = {"BLOOD_GLUCOSE_LOW_CRITIC": current_blood_glucose}
         SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
+    elif float(current_blood_glucose) > 11.0:
+        message = {"BLOOD_GLUCOSE_HIGH_CRITIC": current_blood_glucose}
+        SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
     return predicted_value

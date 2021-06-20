@@ -27,10 +27,10 @@ digraph "Diagram" {
     fontsize = 8,
     margin = 8,
   ];
-  subgraph "production" {
-    subgraph "cluster-SubGraph.production" {
+  subgraph "backend" {
+    subgraph "cluster-SubGraph.backend" {
       graph [
-        label = "production",
+        label = "backend",
         labelloc = "b",
         labeljust = "l",
         margin = "10",
@@ -40,9 +40,9 @@ digraph "Diagram" {
         style = "filled,rounded",
         fillcolor = "#e4e4e4",
       ];
-      subgraph "cluster-SubGraph.production" {
+      subgraph "cluster-SubGraph.backend" {
         graph [
-          label = "production",
+          label = "backend",
           labelloc = "b",
           labeljust = "l",
           margin = "10",
@@ -52,7 +52,7 @@ digraph "Diagram" {
           style = "filled,rounded",
           fillcolor = "#d6d6d6",
         ];
-        "production/production/backend-predicting-lambda-sns-topic" [
+        "backend/backend/backend-predicting-lambda-sns-topic" [
           label = " backend predicting\nlambda sns topic",
           fontsize = 12,
           image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Simple-Notification-Service_64@5x.png",
@@ -65,7 +65,7 @@ digraph "Diagram" {
           width = 2,
           height = 2.4819999999999998,
         ];
-        "production/production/backend-predicting-lambda" [
+        "backend/backend/backend-predicting-lambda" [
           label = " backend predicting\nlambda",
           fontsize = 12,
           image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
@@ -78,7 +78,7 @@ digraph "Diagram" {
           width = 2,
           height = 2.4819999999999998,
         ];
-        "production/production/backend-predicting-lambda-get-ssm-environment-variable" [
+        "backend/backend/backend-predicting-lambda-get-ssm-environment-variable" [
           label = " backend predicting\nlambda get ssm\nenvironment variable",
           fontsize = 12,
           image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
@@ -91,7 +91,7 @@ digraph "Diagram" {
           width = 1.2,
           height = 1.898,
         ];
-        "production/production/backend-predicting-lambda-publish-to-sns" [
+        "backend/backend/backend-predicting-lambda-publish-to-sns" [
           label = " backend predicting\nlambda publish to sns",
           fontsize = 12,
           image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
@@ -104,26 +104,42 @@ digraph "Diagram" {
           width = 1.2,
           height = 1.682,
         ];
-        "production/production/backend-predicting-lambda-profiling-group/ProfilingGroup" [
+        "backend/backend/Rule" [
+          label = " Rule",
+          fontsize = 12,
+          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
+        ];
+        "backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup" [
           label = " CODEGURUPROFILER\nPROFILINGGROUP\nProfilingGroup",
           fontsize = 12,
         ];
       }
     }
   }
-  "production/production/backend-predicting-lambda" -> "production/production/backend-predicting-lambda-profiling-group/ProfilingGroup" [
+  "backend/backend/backend-predicting-lambda" -> "backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup" [
     dir = "both",
   ];
-  "production/production/backend-predicting-lambda" -> "production/production/backend-predicting-lambda-sns-topic" [
+  "backend/backend/backend-predicting-lambda" -> "backend/backend/backend-predicting-lambda-sns-topic" [
     dir = "both",
   ];
-  "production/production/backend-predicting-lambda-get-ssm-environment-variable" -> "production/production/backend-predicting-lambda" [
+  "backend/backend/backend-predicting-lambda-get-ssm-environment-variable" -> "backend/backend/backend-predicting-lambda" [
     dir = "both",
   ];
-  "production/production/backend-predicting-lambda-publish-to-sns" -> "production/production/backend-predicting-lambda-sns-topic" [
+  "backend/backend/backend-predicting-lambda-publish-to-sns" -> "backend/backend/backend-predicting-lambda-sns-topic" [
     dir = "both",
   ];
-  "production/production/backend-predicting-lambda-publish-to-sns" -> "production/production/backend-predicting-lambda" [
+  "backend/backend/backend-predicting-lambda-publish-to-sns" -> "backend/backend/backend-predicting-lambda" [
+    dir = "both",
+  ];
+  "backend/backend/Rule" -> "backend/backend/backend-predicting-lambda" [
     dir = "both",
   ];
 }

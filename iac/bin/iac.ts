@@ -4,7 +4,7 @@ import * as cdk from "@aws-cdk/core";
 import { BackendStack } from "../lib/backend-stack";
 
 import { StrictBuilder } from "builder-pattern";
-import { Backend } from "../lib/StackConfigs";
+import { Backend, mobileNumbers } from "../lib/StackConfigs";
 import { BackendConfigDecorator } from "../lib/1_backend/LambdaBackendConstruct";
 const app = new cdk.App();
 
@@ -22,11 +22,11 @@ const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .environment(Backend.environment)
   .profilingGroupsPermissions(Backend.profilingGroupPermissions)
   .predictingLambdaExportName(Backend.predictingLambdaExportName)
-  .mobileNumber(Backend.mobileNumber)
+  .mobileNumbers(mobileNumbers)
   .build();
 // =========================================
 //
 //  Backend creation
 //
 // =========================================
-new BackendStack(app, Backend.environment, backendStackConfig);
+new BackendStack(app, "backend", backendStackConfig);

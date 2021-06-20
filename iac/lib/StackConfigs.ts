@@ -7,5 +7,6 @@ export enum Backend {
   profilingGroupPermissions = "AmazonCodeGuruProfilerFullAccess",
   predictingLambdaExportName = "predictingLambda",
   timeout = 8,
-  mobileNumber = "+359XXXXXX",
 }
+
+export const mobileNumbers: Array<string> = ["+359898913413"];
