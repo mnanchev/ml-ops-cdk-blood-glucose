@@ -161,7 +161,5 @@ test("Stack has cloudwatch event rule", () => {
   // WHEN
   const stack = new Iac.BackendStack(app, "MyTestStack", backendStackConfig);
   // THEN
-  expectCDK(stack).to(
-    haveResource("AWS::Events::Rule")
-  );
+  expectCDK(stack).to(haveResource("AWS::Events::Rule"));
 });
