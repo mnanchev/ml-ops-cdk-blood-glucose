@@ -9,22 +9,24 @@ import { StrictBuilder } from "builder-pattern";
 import { BackendConfigDecorator } from "../lib/1_backend/LambdaBackendConstruct";
 import { Backend, mobileNumbers } from "../lib/StackConfigs";
 
+const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
+  .solution(Backend.solution)
+  .parameterStoreCredentialsGoogle(Backend.parameterStoreCredentialsGoogle)
+  .timeout(Backend.timeout)
+  .codeLocation(Backend.codeLocation)
+  .memorySize(Backend.memory)
+  .environment(Backend.environment)
+  .profilingGroupsPermissions(Backend.profilingGroupPermissions)
+  .predictingLambdaExportName(Backend.predictingLambdaExportName)
+  .mobileNumbers(mobileNumbers)
+  .build();
+
 test("λ has environment variables", () => {
-  const app = new cdk.App();
-  const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
-    .solution(Backend.solution)
-    .parameterStoreCredentialsGoogle(Backend.parameterStoreCredentialsGoogle)
-    .timeout(Backend.timeout)
-    .codeLocation(Backend.codeLocation)
-    .memorySize(Backend.memory)
-    .environment(Backend.environment)
-    .profilingGroupsPermissions(Backend.profilingGroupPermissions)
-    .predictingLambdaExportName(Backend.predictingLambdaExportName)
-    .mobileNumbers(mobileNumbers)
-    .build();
-  // WHEN
-  const stack = new Iac.BackendStack(app, "MyTestStack", backendStackConfig);
-  // THEN
+  const stack = new Iac.BackendStack(
+    new cdk.App(),
+    "MyTestStack",
+    backendStackConfig
+  );
   expectCDK(stack).to(
     haveResource("AWS::Lambda::Function", {
       Environment: {
@@ -42,20 +44,11 @@ test("λ has environment variables", () => {
 });
 
 test("λ has permission to post code guru profile", () => {
-  const app = new cdk.App();
-  const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
-    .solution(Backend.solution)
-    .parameterStoreCredentialsGoogle(Backend.parameterStoreCredentialsGoogle)
-    .timeout(Backend.timeout)
-    .codeLocation(Backend.codeLocation)
-    .memorySize(Backend.memory)
-    .environment(Backend.environment)
-    .profilingGroupsPermissions(Backend.profilingGroupPermissions)
-    .predictingLambdaExportName(Backend.predictingLambdaExportName)
-    .mobileNumbers(mobileNumbers)
-    .build();
-  // WHEN
-  const stack = new Iac.BackendStack(app, "MyTestStack", backendStackConfig);
+  const stack = new Iac.BackendStack(
+    new cdk.App(),
+    "MyTestStack",
+    backendStackConfig
+  );
   expectCDK(stack).to(
     haveResourceLike("AWS::IAM::Policy", {
       PolicyDocument: {
@@ -81,20 +74,11 @@ test("λ has permission to post code guru profile", () => {
 });
 
 test("λ has permission to publish to sns ", () => {
-  const app = new cdk.App();
-  const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
-    .solution(Backend.solution)
-    .parameterStoreCredentialsGoogle(Backend.parameterStoreCredentialsGoogle)
-    .timeout(Backend.timeout)
-    .codeLocation(Backend.codeLocation)
-    .memorySize(Backend.memory)
-    .environment(Backend.environment)
-    .profilingGroupsPermissions(Backend.profilingGroupPermissions)
-    .predictingLambdaExportName(Backend.predictingLambdaExportName)
-    .mobileNumbers(mobileNumbers)
-    .build();
-  // WHEN
-  const stack = new Iac.BackendStack(app, "MyTestStack", backendStackConfig);
+  const stack = new Iac.BackendStack(
+    new cdk.App(),
+    "MyTestStack",
+    backendStackConfig
+  );
   expectCDK(stack).to(
     haveResourceLike("AWS::IAM::Policy", {
       PolicyDocument: {
@@ -114,20 +98,11 @@ test("λ has permission to publish to sns ", () => {
 });
 
 test("λ has permission to read ssm parameter ", () => {
-  const app = new cdk.App();
-  const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
-    .solution(Backend.solution)
-    .parameterStoreCredentialsGoogle(Backend.parameterStoreCredentialsGoogle)
-    .timeout(Backend.timeout)
-    .codeLocation(Backend.codeLocation)
-    .memorySize(Backend.memory)
-    .environment(Backend.environment)
-    .profilingGroupsPermissions(Backend.profilingGroupPermissions)
-    .predictingLambdaExportName(Backend.predictingLambdaExportName)
-    .mobileNumbers(mobileNumbers)
-    .build();
-  // WHEN
-  const stack = new Iac.BackendStack(app, "MyTestStack", backendStackConfig);
+  const stack = new Iac.BackendStack(
+    new cdk.App(),
+    "TestSSM",
+    backendStackConfig
+  );
   expectCDK(stack).to(
     haveResourceLike("AWS::IAM::Policy", {
       PolicyDocument: {
@@ -146,20 +121,10 @@ test("λ has permission to read ssm parameter ", () => {
 });
 
 test("Stack has cloudwatch event rule", () => {
-  const app = new cdk.App();
-  const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
-    .solution(Backend.solution)
-    .parameterStoreCredentialsGoogle(Backend.parameterStoreCredentialsGoogle)
-    .timeout(Backend.timeout)
-    .codeLocation(Backend.codeLocation)
-    .memorySize(Backend.memory)
-    .environment(Backend.environment)
-    .profilingGroupsPermissions(Backend.profilingGroupPermissions)
-    .predictingLambdaExportName(Backend.predictingLambdaExportName)
-    .mobileNumbers(mobileNumbers)
-    .build();
-  // WHEN
-  const stack = new Iac.BackendStack(app, "MyTestStack", backendStackConfig);
-  // THEN
+  const stack = new Iac.BackendStack(
+    new cdk.App(),
+    "TestEvents",
+    backendStackConfig
+  );
   expectCDK(stack).to(haveResource("AWS::Events::Rule"));
 });

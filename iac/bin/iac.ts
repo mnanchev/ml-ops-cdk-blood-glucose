@@ -6,8 +6,9 @@ import { BackendStack } from "../lib/backend-stack";
 import { StrictBuilder } from "builder-pattern";
 import { Backend, mobileNumbers } from "../lib/StackConfigs";
 import { BackendConfigDecorator } from "../lib/1_backend/LambdaBackendConstruct";
+import {MlOpsPipelineStack} from "../lib/ml-ops-pipeline-stack";
 const app = new cdk.App();
-
+new MlOpsPipelineStack(app, 'MlOpsPipeline');
 // =========================================
 //
 //  Backend configuration builder
