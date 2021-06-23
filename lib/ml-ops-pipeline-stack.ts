@@ -28,9 +28,8 @@ export class MlOpsPipelineStack extends cdk.Stack {
       synthAction: SimpleSynthAction.standardNpmSynth({
         sourceArtifact,
         cloudAssemblyArtifact,
-        subdirectory: "iac",
         actionName: "Build",
-        buildCommand: "npm install && npm run build && docker version",
+        buildCommand: "npm install && npm run build",
       }),
     });
     const deploy = new MlOpsPipelineStage(this, "Deploy");
