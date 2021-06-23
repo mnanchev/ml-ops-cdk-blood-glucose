@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+require("source-map-support/register");
+const cdk = require("@aws-cdk/core");
+const ml_ops_pipeline_stack_1 = require("../lib/ml-ops-pipeline-stack");
+const app = new cdk.App();
+new ml_ops_pipeline_stack_1.MlOpsPipelineStack(app, "MlOpsPipeline");
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaWFjLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiaWFjLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUNBLHVDQUFxQztBQUNyQyxxQ0FBcUM7QUFDckMsd0VBQWtFO0FBQ2xFLE1BQU0sR0FBRyxHQUFHLElBQUksR0FBRyxDQUFDLEdBQUcsRUFBRSxDQUFDO0FBQzFCLElBQUksMENBQWtCLENBQUMsR0FBRyxFQUFFLGVBQWUsQ0FBQyxDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiIyEvdXNyL2Jpbi9lbnYgbm9kZVxuaW1wb3J0IFwic291cmNlLW1hcC1zdXBwb3J0L3JlZ2lzdGVyXCI7XG5pbXBvcnQgKiBhcyBjZGsgZnJvbSBcIkBhd3MtY2RrL2NvcmVcIjtcbmltcG9ydCB7IE1sT3BzUGlwZWxpbmVTdGFjayB9IGZyb20gXCIuLi9saWIvbWwtb3BzLXBpcGVsaW5lLXN0YWNrXCI7XG5jb25zdCBhcHAgPSBuZXcgY2RrLkFwcCgpO1xubmV3IE1sT3BzUGlwZWxpbmVTdGFjayhhcHAsIFwiTWxPcHNQaXBlbGluZVwiKTtcblxuIl19

@@ -1,0 +1,2747 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Construct",
+          "version": "1.109.0"
+        }
+      },
+      "MlOpsPipeline": {
+        "id": "MlOpsPipeline",
+        "path": "MlOpsPipeline",
+        "children": {
+          "MlOpsPipelineRepo": {
+            "id": "MlOpsPipelineRepo",
+            "path": "MlOpsPipeline/MlOpsPipelineRepo",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "MlOpsPipeline/MlOpsPipelineRepo/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::CodeCommit::Repository",
+                  "aws:cdk:cloudformation:props": {
+                    "repositoryName": "MlOpsPipelineRepo"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-codecommit.CfnRepository",
+                  "version": "1.109.0"
+                }
+              },
+              "MlOpsPipelineA026A68F-main-EventRule": {
+                "id": "MlOpsPipelineA026A68F-main-EventRule",
+                "path": "MlOpsPipeline/MlOpsPipelineRepo/MlOpsPipelineA026A68F-main-EventRule",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MlOpsPipeline/MlOpsPipelineRepo/MlOpsPipelineA026A68F-main-EventRule/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                      "aws:cdk:cloudformation:props": {
+                        "eventPattern": {
+                          "source": [
+                            "aws.codecommit"
+                          ],
+                          "resources": [
+                            {
+                              "Fn::GetAtt": [
+                                "MlOpsPipelineRepoF9C3D5AF",
+                                "Arn"
+                              ]
+                            }
+                          ],
+                          "detail-type": [
+                            "CodeCommit Repository State Change"
+                          ],
+                          "detail": {
+                            "event": [
+                              "referenceCreated",
+                              "referenceUpdated"
+                            ],
+                            "referenceName": [
+                              "main"
+                            ]
+                          }
+                        },
+                        "state": "ENABLED",
+                        "targets": [
+                          {
+                            "id": "Target0",
+                            "arn": {
+                              "Fn::Join": [
+                                "",
+                                [
+                                  "arn:",
+                                  {
+                                    "Ref": "AWS::Partition"
+                                  },
+                                  ":codepipeline:",
+                                  {
+                                    "Ref": "AWS::Region"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "AWS::AccountId"
+                                  },
+                                  ":",
+                                  {
+                                    "Ref": "MlOpsPipeline659B073D"
+                                  }
+                                ]
+                              ]
+                            },
+                            "roleArn": {
+                              "Fn::GetAtt": [
+                                "MlOpsPipelineEventsRole3DD6562A",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-events.CfnRule",
+                      "version": "1.109.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-events.Rule",
+                  "version": "1.109.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/aws-codecommit.Repository",
+              "version": "1.109.0"
+            }
+          },
+          "MlOpsPipeline": {
+            "id": "MlOpsPipeline",
+            "path": "MlOpsPipeline/MlOpsPipeline",
+            "children": {
+              "Pipeline": {
+                "id": "Pipeline",
+                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline",
+                "children": {
+                  "ArtifactsBucketEncryptionKey": {
+                    "id": "ArtifactsBucketEncryptionKey",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucketEncryptionKey",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucketEncryptionKey/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::KMS::Key",
+                          "aws:cdk:cloudformation:props": {
+                            "keyPolicy": {
+                              "Statement": [
+                                {
+                                  "Action": "kms:*",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "AWS": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":iam::",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":root"
+                                        ]
+                                      ]
+                                    }
+                                  },
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-kms.CfnKey",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-kms.Key",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "ArtifactsBucketEncryptionKeyAlias": {
+                    "id": "ArtifactsBucketEncryptionKeyAlias",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucketEncryptionKeyAlias",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucketEncryptionKeyAlias/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::KMS::Alias",
+                          "aws:cdk:cloudformation:props": {
+                            "aliasName": "alias/codepipeline-mlopspipelinea026a68f",
+                            "targetKeyId": {
+                              "Fn::GetAtt": [
+                                "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-kms.CfnAlias",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-kms.Alias",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "ArtifactsBucket": {
+                    "id": "ArtifactsBucket",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucket",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucket/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                          "aws:cdk:cloudformation:props": {
+                            "bucketEncryption": {
+                              "serverSideEncryptionConfiguration": [
+                                {
+                                  "serverSideEncryptionByDefault": {
+                                    "sseAlgorithm": "aws:kms",
+                                    "kmsMasterKeyId": {
+                                      "Fn::GetAtt": [
+                                        "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                        "Arn"
+                                      ]
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "publicAccessBlockConfiguration": {
+                              "blockPublicAcls": true,
+                              "blockPublicPolicy": true,
+                              "ignorePublicAcls": true,
+                              "restrictPublicBuckets": true
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-s3.CfnBucket",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "Notifications": {
+                        "id": "Notifications",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/ArtifactsBucket/Notifications",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-s3.Bucket",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "Role": {
+                    "id": "Role",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Role",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Role/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "codepipeline.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnRole",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Role/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Role/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*",
+                                        "s3:DeleteObject*",
+                                        "s3:PutObject",
+                                        "s3:Abort*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "MlOpsPipelineArtifactsBucket56B37B53",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "MlOpsPipelineArtifactsBucket56B37B53",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "kms:Decrypt",
+                                        "kms:DescribeKey",
+                                        "kms:Encrypt",
+                                        "kms:ReEncrypt*",
+                                        "kms:GenerateDataKey*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "MlOpsPipelineSourceCodeCommitCodePipelineActionRoleFDA8F038",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "MlOpsPipelineBuildCodePipelineActionRoleD9EF9EC2",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "MlOpsPipelineUpdatePipelineSelfMutateCodePipelineActionRole7210B3A0",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "MlOpsPipelineAssetsDockerRoleB8F83F1E",
+                                          "Arn"
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":iam::",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":role/cdk-hnb659fds-deploy-role-",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            "-",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "MlOpsPipelineRoleDefaultPolicyE5E83489",
+                                "roles": [
+                                  {
+                                    "Ref": "MlOpsPipelineRoleF7F8A422"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Role",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::CodePipeline::Pipeline",
+                      "aws:cdk:cloudformation:props": {
+                        "roleArn": {
+                          "Fn::GetAtt": [
+                            "MlOpsPipelineRoleF7F8A422",
+                            "Arn"
+                          ]
+                        },
+                        "stages": [
+                          {
+                            "name": "Source",
+                            "actions": [
+                              {
+                                "name": "CodeCommit",
+                                "outputArtifacts": [
+                                  {
+                                    "name": "Artifact_Source_CodeCommit"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Source",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeCommit"
+                                },
+                                "configuration": {
+                                  "RepositoryName": {
+                                    "Fn::GetAtt": [
+                                      "MlOpsPipelineRepoF9C3D5AF",
+                                      "Name"
+                                    ]
+                                  },
+                                  "BranchName": "main",
+                                  "PollForSourceChanges": false
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "MlOpsPipelineSourceCodeCommitCodePipelineActionRoleFDA8F038",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Build",
+                            "actions": [
+                              {
+                                "name": "Build",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "Artifact_Source_CodeCommit"
+                                  }
+                                ],
+                                "outputArtifacts": [
+                                  {
+                                    "name": "Artifact_Build_Build"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "MlOpsPipelineBuildCdkBuildProject37800EE1"
+                                  },
+                                  "EnvironmentVariables": "[{\"name\":\"_PROJECT_CONFIG_HASH\",\"type\":\"PLAINTEXT\",\"value\":\"b42a1e2140345d21cfb850f04f83b68a5e5454924e4553df5458110f72cabb0e\"}]"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "MlOpsPipelineBuildCodePipelineActionRoleD9EF9EC2",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "UpdatePipeline",
+                            "actions": [
+                              {
+                                "name": "SelfMutate",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "Artifact_Build_Build"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "MlOpsPipelineUpdatePipelineSelfMutationE8938F72"
+                                  }
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "MlOpsPipelineUpdatePipelineSelfMutateCodePipelineActionRole7210B3A0",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Assets",
+                            "actions": [
+                              {
+                                "name": "DockerAsset1",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "Artifact_Build_Build"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Build",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CodeBuild"
+                                },
+                                "configuration": {
+                                  "ProjectName": {
+                                    "Ref": "MlOpsPipelineAssetsDockerAsset13A8653D0"
+                                  }
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::GetAtt": [
+                                    "MlOpsPipelineAssetsDockerRoleB8F83F1E",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "name": "Deploy",
+                            "actions": [
+                              {
+                                "name": "backend.Prepare",
+                                "inputArtifacts": [
+                                  {
+                                    "name": "Artifact_Build_Build"
+                                  }
+                                ],
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "Deploy-backend",
+                                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                                  "RoleArn": {
+                                    "Fn::Join": [
+                                      "",
+                                      [
+                                        "arn:",
+                                        {
+                                          "Ref": "AWS::Partition"
+                                        },
+                                        ":iam::",
+                                        {
+                                          "Ref": "AWS::AccountId"
+                                        },
+                                        ":role/cdk-hnb659fds-cfn-exec-role-",
+                                        {
+                                          "Ref": "AWS::AccountId"
+                                        },
+                                        "-",
+                                        {
+                                          "Ref": "AWS::Region"
+                                        }
+                                      ]
+                                    ]
+                                  },
+                                  "ActionMode": "CHANGE_SET_REPLACE",
+                                  "ChangeSetName": "PipelineChange",
+                                  "TemplatePath": "Artifact_Build_Build::assembly-MlOpsPipeline-Deploy/MlOpsPipelineDeploybackendB011FA9E.template.json"
+                                },
+                                "runOrder": 1,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":role/cdk-hnb659fds-deploy-role-",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      "-",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              },
+                              {
+                                "name": "backend.Deploy",
+                                "actionTypeId": {
+                                  "category": "Deploy",
+                                  "version": "1",
+                                  "owner": "AWS",
+                                  "provider": "CloudFormation"
+                                },
+                                "configuration": {
+                                  "StackName": "Deploy-backend",
+                                  "ActionMode": "CHANGE_SET_EXECUTE",
+                                  "ChangeSetName": "PipelineChange"
+                                },
+                                "runOrder": 2,
+                                "roleArn": {
+                                  "Fn::Join": [
+                                    "",
+                                    [
+                                      "arn:",
+                                      {
+                                        "Ref": "AWS::Partition"
+                                      },
+                                      ":iam::",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      ":role/cdk-hnb659fds-deploy-role-",
+                                      {
+                                        "Ref": "AWS::AccountId"
+                                      },
+                                      "-",
+                                      {
+                                        "Ref": "AWS::Region"
+                                      }
+                                    ]
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ],
+                        "artifactStore": {
+                          "type": "S3",
+                          "location": {
+                            "Ref": "MlOpsPipelineArtifactsBucket56B37B53"
+                          },
+                          "encryptionKey": {
+                            "type": "KMS",
+                            "id": {
+                              "Fn::GetAtt": [
+                                "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                "Arn"
+                              ]
+                            }
+                          }
+                        },
+                        "name": "MlOpsPipeline",
+                        "restartExecutionOnUpdate": true
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-codepipeline.CfnPipeline",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "Source": {
+                    "id": "Source",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Source",
+                    "children": {
+                      "CodeCommit": {
+                        "id": "CodeCommit",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Source/CodeCommit",
+                        "children": {
+                          "CodePipelineActionRole": {
+                            "id": "CodePipelineActionRole",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Source/CodeCommit/CodePipelineActionRole",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Source/CodeCommit/CodePipelineActionRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "AWS": {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":iam::",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":root"
+                                                ]
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                                  "version": "1.109.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Source/CodeCommit/CodePipelineActionRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": [
+                                                "s3:GetObject*",
+                                                "s3:GetBucket*",
+                                                "s3:List*",
+                                                "s3:DeleteObject*",
+                                                "s3:PutObject",
+                                                "s3:Abort*"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": [
+                                                {
+                                                  "Fn::GetAtt": [
+                                                    "MlOpsPipelineArtifactsBucket56B37B53",
+                                                    "Arn"
+                                                  ]
+                                                },
+                                                {
+                                                  "Fn::Join": [
+                                                    "",
+                                                    [
+                                                      {
+                                                        "Fn::GetAtt": [
+                                                          "MlOpsPipelineArtifactsBucket56B37B53",
+                                                          "Arn"
+                                                        ]
+                                                      },
+                                                      "/*"
+                                                    ]
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "Action": [
+                                                "kms:Decrypt",
+                                                "kms:DescribeKey",
+                                                "kms:Encrypt",
+                                                "kms:ReEncrypt*",
+                                                "kms:GenerateDataKey*"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::GetAtt": [
+                                                  "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            },
+                                            {
+                                              "Action": [
+                                                "codecommit:GetBranch",
+                                                "codecommit:GetCommit",
+                                                "codecommit:UploadArchive",
+                                                "codecommit:GetUploadArchiveStatus",
+                                                "codecommit:CancelUploadArchive"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::GetAtt": [
+                                                  "MlOpsPipelineRepoF9C3D5AF",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "MlOpsPipelineSourceCodeCommitCodePipelineActionRoleDefaultPolicyA3BE2B94",
+                                        "roles": [
+                                          {
+                                            "Ref": "MlOpsPipelineSourceCodeCommitCodePipelineActionRoleFDA8F038"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                                      "version": "1.109.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.Policy",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.Role",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "EventsRole": {
+                    "id": "EventsRole",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/EventsRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/EventsRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "events.amazonaws.com"
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnRole",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/EventsRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/EventsRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "codepipeline:StartPipelineExecution",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":codepipeline:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "MlOpsPipeline659B073D"
+                                            }
+                                          ]
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "MlOpsPipelineEventsRoleDefaultPolicy13C0823F",
+                                "roles": [
+                                  {
+                                    "Ref": "MlOpsPipelineEventsRole3DD6562A"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Role",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "Build": {
+                    "id": "Build",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build",
+                    "children": {
+                      "Build": {
+                        "id": "Build",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build",
+                        "children": {
+                          "CodePipelineActionRole": {
+                            "id": "CodePipelineActionRole",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CodePipelineActionRole",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CodePipelineActionRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "AWS": {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":iam::",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":root"
+                                                ]
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                                  "version": "1.109.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CodePipelineActionRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CodePipelineActionRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": [
+                                                "codebuild:BatchGetBuilds",
+                                                "codebuild:StartBuild",
+                                                "codebuild:StopBuild"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::GetAtt": [
+                                                  "MlOpsPipelineBuildCdkBuildProject37800EE1",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "MlOpsPipelineBuildCodePipelineActionRoleDefaultPolicyF6B55221",
+                                        "roles": [
+                                          {
+                                            "Ref": "MlOpsPipelineBuildCodePipelineActionRoleD9EF9EC2"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                                      "version": "1.109.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.Policy",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.Role",
+                              "version": "1.109.0"
+                            }
+                          },
+                          "CdkBuildProject": {
+                            "id": "CdkBuildProject",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CdkBuildProject",
+                            "children": {
+                              "Role": {
+                                "id": "Role",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CdkBuildProject/Role",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CdkBuildProject/Role/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                      "aws:cdk:cloudformation:props": {
+                                        "assumeRolePolicyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": "sts:AssumeRole",
+                                              "Effect": "Allow",
+                                              "Principal": {
+                                                "Service": "codebuild.amazonaws.com"
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "@aws-cdk/aws-iam.CfnRole",
+                                      "version": "1.109.0"
+                                    }
+                                  },
+                                  "DefaultPolicy": {
+                                    "id": "DefaultPolicy",
+                                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CdkBuildProject/Role/DefaultPolicy",
+                                    "children": {
+                                      "Resource": {
+                                        "id": "Resource",
+                                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CdkBuildProject/Role/DefaultPolicy/Resource",
+                                        "attributes": {
+                                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                          "aws:cdk:cloudformation:props": {
+                                            "policyDocument": {
+                                              "Statement": [
+                                                {
+                                                  "Action": [
+                                                    "logs:CreateLogGroup",
+                                                    "logs:CreateLogStream",
+                                                    "logs:PutLogEvents"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": [
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          "arn:",
+                                                          {
+                                                            "Ref": "AWS::Partition"
+                                                          },
+                                                          ":logs:",
+                                                          {
+                                                            "Ref": "AWS::Region"
+                                                          },
+                                                          ":",
+                                                          {
+                                                            "Ref": "AWS::AccountId"
+                                                          },
+                                                          ":log-group:/aws/codebuild/",
+                                                          {
+                                                            "Ref": "MlOpsPipelineBuildCdkBuildProject37800EE1"
+                                                          }
+                                                        ]
+                                                      ]
+                                                    },
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          "arn:",
+                                                          {
+                                                            "Ref": "AWS::Partition"
+                                                          },
+                                                          ":logs:",
+                                                          {
+                                                            "Ref": "AWS::Region"
+                                                          },
+                                                          ":",
+                                                          {
+                                                            "Ref": "AWS::AccountId"
+                                                          },
+                                                          ":log-group:/aws/codebuild/",
+                                                          {
+                                                            "Ref": "MlOpsPipelineBuildCdkBuildProject37800EE1"
+                                                          },
+                                                          ":*"
+                                                        ]
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "codebuild:CreateReportGroup",
+                                                    "codebuild:CreateReport",
+                                                    "codebuild:UpdateReport",
+                                                    "codebuild:BatchPutTestCases",
+                                                    "codebuild:BatchPutCodeCoverages"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::Join": [
+                                                      "",
+                                                      [
+                                                        "arn:",
+                                                        {
+                                                          "Ref": "AWS::Partition"
+                                                        },
+                                                        ":codebuild:",
+                                                        {
+                                                          "Ref": "AWS::Region"
+                                                        },
+                                                        ":",
+                                                        {
+                                                          "Ref": "AWS::AccountId"
+                                                        },
+                                                        ":report-group/",
+                                                        {
+                                                          "Ref": "MlOpsPipelineBuildCdkBuildProject37800EE1"
+                                                        },
+                                                        "-*"
+                                                      ]
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "s3:GetObject*",
+                                                    "s3:GetBucket*",
+                                                    "s3:List*",
+                                                    "s3:DeleteObject*",
+                                                    "s3:PutObject",
+                                                    "s3:Abort*"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": [
+                                                    {
+                                                      "Fn::GetAtt": [
+                                                        "MlOpsPipelineArtifactsBucket56B37B53",
+                                                        "Arn"
+                                                      ]
+                                                    },
+                                                    {
+                                                      "Fn::Join": [
+                                                        "",
+                                                        [
+                                                          {
+                                                            "Fn::GetAtt": [
+                                                              "MlOpsPipelineArtifactsBucket56B37B53",
+                                                              "Arn"
+                                                            ]
+                                                          },
+                                                          "/*"
+                                                        ]
+                                                      ]
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "kms:Decrypt",
+                                                    "kms:DescribeKey",
+                                                    "kms:Encrypt",
+                                                    "kms:ReEncrypt*",
+                                                    "kms:GenerateDataKey*"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::GetAtt": [
+                                                      "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                                      "Arn"
+                                                    ]
+                                                  }
+                                                },
+                                                {
+                                                  "Action": [
+                                                    "kms:Decrypt",
+                                                    "kms:Encrypt",
+                                                    "kms:ReEncrypt*",
+                                                    "kms:GenerateDataKey*"
+                                                  ],
+                                                  "Effect": "Allow",
+                                                  "Resource": {
+                                                    "Fn::GetAtt": [
+                                                      "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                                      "Arn"
+                                                    ]
+                                                  }
+                                                }
+                                              ],
+                                              "Version": "2012-10-17"
+                                            },
+                                            "policyName": "MlOpsPipelineBuildCdkBuildProjectRoleDefaultPolicyF1D3F3CE",
+                                            "roles": [
+                                              {
+                                                "Ref": "MlOpsPipelineBuildCdkBuildProjectRoleF4F145B5"
+                                              }
+                                            ]
+                                          }
+                                        },
+                                        "constructInfo": {
+                                          "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                                          "version": "1.109.0"
+                                        }
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "@aws-cdk/aws-iam.Policy",
+                                      "version": "1.109.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.Role",
+                                  "version": "1.109.0"
+                                }
+                              },
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Build/Build/CdkBuildProject/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                                  "aws:cdk:cloudformation:props": {
+                                    "artifacts": {
+                                      "type": "CODEPIPELINE"
+                                    },
+                                    "environment": {
+                                      "type": "LINUX_CONTAINER",
+                                      "image": "aws/codebuild/standard:5.0",
+                                      "imagePullCredentialsType": "CODEBUILD",
+                                      "privilegedMode": false,
+                                      "computeType": "BUILD_GENERAL1_SMALL",
+                                      "environmentVariables": [
+                                        {
+                                          "name": "NPM_CONFIG_UNSAFE_PERM",
+                                          "type": "PLAINTEXT",
+                                          "value": "true"
+                                        }
+                                      ]
+                                    },
+                                    "serviceRole": {
+                                      "Fn::GetAtt": [
+                                        "MlOpsPipelineBuildCdkBuildProjectRoleF4F145B5",
+                                        "Arn"
+                                      ]
+                                    },
+                                    "source": {
+                                      "type": "CODEPIPELINE",
+                                      "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"pre_build\": {\n      \"commands\": [\n        \"cd iac\",\n        \"cd iac && pwd && npm install && ls -alh\"\n      ]\n    },\n    \"build\": {\n      \"commands\": [\n        \"npx cdk synth\"\n      ]\n    }\n  },\n  \"artifacts\": {\n    \"base-directory\": \"iac/cdk.out\",\n    \"files\": \"**/*\"\n  }\n}"
+                                    },
+                                    "encryptionKey": {
+                                      "Fn::GetAtt": [
+                                        "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                        "Arn"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-codebuild.CfnProject",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-codebuild.PipelineProject",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "UpdatePipeline": {
+                    "id": "UpdatePipeline",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/UpdatePipeline",
+                    "children": {
+                      "SelfMutate": {
+                        "id": "SelfMutate",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/UpdatePipeline/SelfMutate",
+                        "children": {
+                          "CodePipelineActionRole": {
+                            "id": "CodePipelineActionRole",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "AWS": {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":iam::",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":root"
+                                                ]
+                                              ]
+                                            }
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                                  "version": "1.109.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/UpdatePipeline/SelfMutate/CodePipelineActionRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": [
+                                                "codebuild:BatchGetBuilds",
+                                                "codebuild:StartBuild",
+                                                "codebuild:StopBuild"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::GetAtt": [
+                                                  "MlOpsPipelineUpdatePipelineSelfMutationE8938F72",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "MlOpsPipelineUpdatePipelineSelfMutateCodePipelineActionRoleDefaultPolicyACAAE82E",
+                                        "roles": [
+                                          {
+                                            "Ref": "MlOpsPipelineUpdatePipelineSelfMutateCodePipelineActionRole7210B3A0"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                                      "version": "1.109.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.Policy",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.Role",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "Deploy": {
+                    "id": "Deploy",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Deploy",
+                    "children": {
+                      "backend.Deploy": {
+                        "id": "backend.Deploy",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Deploy/backend.Deploy",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend.Prepare": {
+                        "id": "backend.Prepare",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Deploy/backend.Prepare",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "Assets": {
+                    "id": "Assets",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Assets",
+                    "children": {
+                      "DockerAsset1": {
+                        "id": "DockerAsset1",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Pipeline/Assets/DockerAsset1",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/aws-codepipeline.Pipeline",
+                  "version": "1.109.0"
+                }
+              },
+              "UpdatePipeline": {
+                "id": "UpdatePipeline",
+                "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline",
+                "children": {
+                  "SelfMutation": {
+                    "id": "SelfMutation",
+                    "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation",
+                    "children": {
+                      "Role": {
+                        "id": "Role",
+                        "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation/Role",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation/Role/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                              "aws:cdk:cloudformation:props": {
+                                "assumeRolePolicyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Principal": {
+                                        "Service": "codebuild.amazonaws.com"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnRole",
+                              "version": "1.109.0"
+                            }
+                          },
+                          "DefaultPolicy": {
+                            "id": "DefaultPolicy",
+                            "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation/Role/DefaultPolicy/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                  "aws:cdk:cloudformation:props": {
+                                    "policyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": [
+                                            "logs:CreateLogGroup",
+                                            "logs:CreateLogStream",
+                                            "logs:PutLogEvents"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":logs:",
+                                                  {
+                                                    "Ref": "AWS::Region"
+                                                  },
+                                                  ":",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":log-group:/aws/codebuild/",
+                                                  {
+                                                    "Ref": "MlOpsPipelineUpdatePipelineSelfMutationE8938F72"
+                                                  }
+                                                ]
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  "arn:",
+                                                  {
+                                                    "Ref": "AWS::Partition"
+                                                  },
+                                                  ":logs:",
+                                                  {
+                                                    "Ref": "AWS::Region"
+                                                  },
+                                                  ":",
+                                                  {
+                                                    "Ref": "AWS::AccountId"
+                                                  },
+                                                  ":log-group:/aws/codebuild/",
+                                                  {
+                                                    "Ref": "MlOpsPipelineUpdatePipelineSelfMutationE8938F72"
+                                                  },
+                                                  ":*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": [
+                                            "codebuild:CreateReportGroup",
+                                            "codebuild:CreateReport",
+                                            "codebuild:UpdateReport",
+                                            "codebuild:BatchPutTestCases",
+                                            "codebuild:BatchPutCodeCoverages"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:",
+                                                {
+                                                  "Ref": "AWS::Partition"
+                                                },
+                                                ":codebuild:",
+                                                {
+                                                  "Ref": "AWS::Region"
+                                                },
+                                                ":",
+                                                {
+                                                  "Ref": "AWS::AccountId"
+                                                },
+                                                ":report-group/",
+                                                {
+                                                  "Ref": "MlOpsPipelineUpdatePipelineSelfMutationE8938F72"
+                                                },
+                                                "-*"
+                                              ]
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Condition": {
+                                            "ForAnyValue:StringEquals": {
+                                              "iam:ResourceTag/aws-cdk:bootstrap-role": [
+                                                "image-publishing",
+                                                "file-publishing",
+                                                "deploy"
+                                              ]
+                                            }
+                                          },
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::Join": [
+                                              "",
+                                              [
+                                                "arn:*:iam::",
+                                                {
+                                                  "Ref": "AWS::AccountId"
+                                                },
+                                                ":role/*"
+                                              ]
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": "cloudformation:DescribeStacks",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": "s3:ListBucket",
+                                          "Effect": "Allow",
+                                          "Resource": "*"
+                                        },
+                                        {
+                                          "Action": [
+                                            "s3:GetObject*",
+                                            "s3:GetBucket*",
+                                            "s3:List*"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": [
+                                            {
+                                              "Fn::GetAtt": [
+                                                "MlOpsPipelineArtifactsBucket56B37B53",
+                                                "Arn"
+                                              ]
+                                            },
+                                            {
+                                              "Fn::Join": [
+                                                "",
+                                                [
+                                                  {
+                                                    "Fn::GetAtt": [
+                                                      "MlOpsPipelineArtifactsBucket56B37B53",
+                                                      "Arn"
+                                                    ]
+                                                  },
+                                                  "/*"
+                                                ]
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Action": [
+                                            "kms:Decrypt",
+                                            "kms:DescribeKey"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::GetAtt": [
+                                              "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                              "Arn"
+                                            ]
+                                          }
+                                        },
+                                        {
+                                          "Action": [
+                                            "kms:Decrypt",
+                                            "kms:Encrypt",
+                                            "kms:ReEncrypt*",
+                                            "kms:GenerateDataKey*"
+                                          ],
+                                          "Effect": "Allow",
+                                          "Resource": {
+                                            "Fn::GetAtt": [
+                                              "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                              "Arn"
+                                            ]
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "policyName": "MlOpsPipelineUpdatePipelineSelfMutationRoleDefaultPolicy9C90D78A",
+                                    "roles": [
+                                      {
+                                        "Ref": "MlOpsPipelineUpdatePipelineSelfMutationRole0E59CC5E"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.Policy",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Role",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                          "aws:cdk:cloudformation:props": {
+                            "artifacts": {
+                              "type": "CODEPIPELINE"
+                            },
+                            "environment": {
+                              "type": "LINUX_CONTAINER",
+                              "image": "aws/codebuild/standard:5.0",
+                              "imagePullCredentialsType": "CODEBUILD",
+                              "privilegedMode": false,
+                              "computeType": "BUILD_GENERAL1_SMALL"
+                            },
+                            "serviceRole": {
+                              "Fn::GetAtt": [
+                                "MlOpsPipelineUpdatePipelineSelfMutationRole0E59CC5E",
+                                "Arn"
+                              ]
+                            },
+                            "source": {
+                              "type": "CODEPIPELINE",
+                              "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g aws-cdk\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk -a . deploy MlOpsPipeline --require-approval=never --verbose\"\n      ]\n    }\n  }\n}"
+                            },
+                            "encryptionKey": {
+                              "Fn::GetAtt": [
+                                "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                "Arn"
+                              ]
+                            },
+                            "name": "MlOpsPipeline-selfupdate"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-codebuild.CfnProject",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-codebuild.PipelineProject",
+                      "version": "1.109.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/pipelines.UpdatePipelineAction",
+                  "version": "1.109.0"
+                }
+              },
+              "Assets": {
+                "id": "Assets",
+                "path": "MlOpsPipeline/MlOpsPipeline/Assets",
+                "children": {
+                  "DockerRole": {
+                    "id": "DockerRole",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                          "aws:cdk:cloudformation:props": {
+                            "assumeRolePolicyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": "sts:AssumeRole",
+                                  "Effect": "Allow",
+                                  "Principal": {
+                                    "Service": "codebuild.amazonaws.com",
+                                    "AWS": {
+                                      "Fn::Join": [
+                                        "",
+                                        [
+                                          "arn:",
+                                          {
+                                            "Ref": "AWS::Partition"
+                                          },
+                                          ":iam::",
+                                          {
+                                            "Ref": "AWS::AccountId"
+                                          },
+                                          ":root"
+                                        ]
+                                      ]
+                                    }
+                                  }
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.CfnRole",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "DefaultPolicy": {
+                        "id": "DefaultPolicy",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole/DefaultPolicy",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole/DefaultPolicy/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": [
+                                        "logs:CreateLogGroup",
+                                        "logs:CreateLogStream",
+                                        "logs:PutLogEvents"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":logs:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":log-group:/aws/codebuild/*"
+                                          ]
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": [
+                                        "codebuild:CreateReportGroup",
+                                        "codebuild:CreateReport",
+                                        "codebuild:UpdateReport",
+                                        "codebuild:BatchPutTestCases",
+                                        "codebuild:BatchPutCodeCoverages"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":codebuild:",
+                                            {
+                                              "Ref": "AWS::Region"
+                                            },
+                                            ":",
+                                            {
+                                              "Ref": "AWS::AccountId"
+                                            },
+                                            ":report-group/*"
+                                          ]
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "Action": [
+                                        "codebuild:BatchGetBuilds",
+                                        "codebuild:StartBuild",
+                                        "codebuild:StopBuild"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": "*"
+                                    },
+                                    {
+                                      "Action": "sts:AssumeRole",
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::Sub": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-image-publishing-role-${AWS::AccountId}-${AWS::Region}"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "s3:GetObject*",
+                                        "s3:GetBucket*",
+                                        "s3:List*"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": [
+                                        {
+                                          "Fn::GetAtt": [
+                                            "MlOpsPipelineArtifactsBucket56B37B53",
+                                            "Arn"
+                                          ]
+                                        },
+                                        {
+                                          "Fn::Join": [
+                                            "",
+                                            [
+                                              {
+                                                "Fn::GetAtt": [
+                                                  "MlOpsPipelineArtifactsBucket56B37B53",
+                                                  "Arn"
+                                                ]
+                                              },
+                                              "/*"
+                                            ]
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Action": [
+                                        "kms:Decrypt",
+                                        "kms:DescribeKey"
+                                      ],
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Fn::GetAtt": [
+                                          "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                          "Arn"
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "MlOpsPipelineAssetsDockerRoleDefaultPolicyA0ECA8B0",
+                                "roles": [
+                                  {
+                                    "Ref": "MlOpsPipelineAssetsDockerRoleB8F83F1E"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/aws-iam.Role",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "ImmutableRoleDockerRole": {
+                    "id": "ImmutableRoleDockerRole",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Assets/ImmutableRoleDockerRole",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "DockerAsset1": {
+                    "id": "DockerAsset1",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1/Default",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1/Default/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::CodeBuild::Project",
+                              "aws:cdk:cloudformation:props": {
+                                "artifacts": {
+                                  "type": "CODEPIPELINE"
+                                },
+                                "environment": {
+                                  "type": "LINUX_CONTAINER",
+                                  "image": "aws/codebuild/standard:5.0",
+                                  "imagePullCredentialsType": "CODEBUILD",
+                                  "privilegedMode": true,
+                                  "computeType": "BUILD_GENERAL1_SMALL"
+                                },
+                                "serviceRole": {
+                                  "Fn::GetAtt": [
+                                    "MlOpsPipelineAssetsDockerRoleB8F83F1E",
+                                    "Arn"
+                                  ]
+                                },
+                                "source": {
+                                  "type": "CODEPIPELINE",
+                                  "buildSpec": "{\n  \"version\": \"0.2\",\n  \"phases\": {\n    \"install\": {\n      \"commands\": \"npm install -g cdk-assets\"\n    },\n    \"build\": {\n      \"commands\": [\n        \"cdk-assets --path \\\"assembly-MlOpsPipeline-Deploy/MlOpsPipelineDeploybackendB011FA9E.assets.json\\\" --verbose publish \\\"07097ffd55beebbc7493101247d5d334236a3490cc870256eb50667b137d1b01:current_account-current_region\\\"\"\n      ]\n    }\n  }\n}"
+                                },
+                                "encryptionKey": {
+                                  "Fn::GetAtt": [
+                                    "MlOpsPipelineArtifactsBucketEncryptionKey15FAA372",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-codebuild.CfnProject",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-codebuild.PipelineProject",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/pipelines.PublishAssetsAction",
+                      "version": "1.109.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Construct",
+                  "version": "1.109.0"
+                }
+              },
+              "Deploy": {
+                "id": "Deploy",
+                "path": "MlOpsPipeline/MlOpsPipeline/Deploy",
+                "children": {
+                  "arn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}": {
+                    "id": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Deploy/arn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}": {
+                    "id": "ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Deploy/ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+                    "children": {
+                      "8389e75f-0810-4838-bf64-d6f85a95cf83": {
+                        "id": "8389e75f-0810-4838-bf64-d6f85a95cf83",
+                        "path": "MlOpsPipeline/MlOpsPipeline/Deploy/ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}/8389e75f-0810-4838-bf64-d6f85a95cf83",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.Construct",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "arn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}": {
+                    "id": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Deploy/arn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}": {
+                    "id": "ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+                    "path": "MlOpsPipeline/MlOpsPipeline/Deploy/ImmutableRolearn:${AWS::Partition}:iam::${AWS::AccountId}:role--cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Resource",
+                      "version": "1.109.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/pipelines.CdkStage",
+                  "version": "1.109.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/pipelines.CdkPipeline",
+              "version": "1.109.0"
+            }
+          },
+          "Deploy": {
+            "id": "Deploy",
+            "path": "MlOpsPipeline/Deploy",
+            "children": {
+              "backend": {
+                "id": "backend",
+                "path": "MlOpsPipeline/Deploy/backend",
+                "children": {
+                  "backend": {
+                    "id": "backend",
+                    "path": "MlOpsPipeline/Deploy/backend/backend",
+                    "children": {
+                      "backend-predicting-lambda-profiling-group": {
+                        "id": "backend-predicting-lambda-profiling-group",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-profiling-group",
+                        "children": {
+                          "ProfilingGroup": {
+                            "id": "ProfilingGroup",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::CodeGuruProfiler::ProfilingGroup",
+                              "aws:cdk:cloudformation:props": {
+                                "profilingGroupName": "MlOpsPipelineDeploybackendbackendpredictinglambdaprofilinggroup049734C3",
+                                "computePlatform": "AWSLambda"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-codeguruprofiler.CfnProfilingGroup",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-codeguruprofiler.ProfilingGroup",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend-predicting-lambda-sns-topic": {
+                        "id": "backend-predicting-lambda-sns-topic",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::SNS::Topic",
+                              "aws:cdk:cloudformation:props": {
+                                "displayName": "BLOOD_GLUCOSE_CRIT"
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-sns.CfnTopic",
+                              "version": "1.109.0"
+                            }
+                          },
+                          "+359898913413": {
+                            "id": "+359898913413",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic/+359898913413",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic/+359898913413/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::SNS::Subscription",
+                                  "aws:cdk:cloudformation:props": {
+                                    "protocol": "sms",
+                                    "topicArn": {
+                                      "Ref": "backendbackendpredictinglambdasnstopicD0E78111"
+                                    },
+                                    "endpoint": "+359898913413"
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-sns.CfnSubscription",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-sns.Subscription",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-sns.Topic",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend-predicting-lambda": {
+                        "id": "backend-predicting-lambda",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda",
+                        "children": {
+                          "ServiceRole": {
+                            "id": "ServiceRole",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/ServiceRole",
+                            "children": {
+                              "Resource": {
+                                "id": "Resource",
+                                "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/ServiceRole/Resource",
+                                "attributes": {
+                                  "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                                  "aws:cdk:cloudformation:props": {
+                                    "assumeRolePolicyDocument": {
+                                      "Statement": [
+                                        {
+                                          "Action": "sts:AssumeRole",
+                                          "Effect": "Allow",
+                                          "Principal": {
+                                            "Service": "lambda.amazonaws.com"
+                                          }
+                                        }
+                                      ],
+                                      "Version": "2012-10-17"
+                                    },
+                                    "managedPolicyArns": [
+                                      {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                                          ]
+                                        ]
+                                      },
+                                      {
+                                        "Fn::Join": [
+                                          "",
+                                          [
+                                            "arn:",
+                                            {
+                                              "Ref": "AWS::Partition"
+                                            },
+                                            ":iam::aws:policy/AmazonCodeGuruProfilerFullAccess"
+                                          ]
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.CfnRole",
+                                  "version": "1.109.0"
+                                }
+                              },
+                              "DefaultPolicy": {
+                                "id": "DefaultPolicy",
+                                "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/ServiceRole/DefaultPolicy",
+                                "children": {
+                                  "Resource": {
+                                    "id": "Resource",
+                                    "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/ServiceRole/DefaultPolicy/Resource",
+                                    "attributes": {
+                                      "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                                      "aws:cdk:cloudformation:props": {
+                                        "policyDocument": {
+                                          "Statement": [
+                                            {
+                                              "Action": [
+                                                "codeguru-profiler:ConfigureAgent",
+                                                "codeguru-profiler:PostAgentProfile"
+                                              ],
+                                              "Effect": "Allow",
+                                              "Resource": {
+                                                "Fn::GetAtt": [
+                                                  "backendbackendpredictinglambdaprofilinggroupProfilingGroup594CE7AB",
+                                                  "Arn"
+                                                ]
+                                              }
+                                            }
+                                          ],
+                                          "Version": "2012-10-17"
+                                        },
+                                        "policyName": "backendbackendpredictinglambdaServiceRoleDefaultPolicyF4F248EC",
+                                        "roles": [
+                                          {
+                                            "Ref": "backendbackendpredictinglambdaServiceRoleC15536D9"
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    "constructInfo": {
+                                      "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                                      "version": "1.109.0"
+                                    }
+                                  }
+                                },
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-iam.Policy",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.Role",
+                              "version": "1.109.0"
+                            }
+                          },
+                          "AssetImage": {
+                            "id": "AssetImage",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/AssetImage",
+                            "children": {
+                              "Staging": {
+                                "id": "Staging",
+                                "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/AssetImage/Staging",
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/core.AssetStaging",
+                                  "version": "1.109.0"
+                                }
+                              },
+                              "Repository": {
+                                "id": "Repository",
+                                "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/AssetImage/Repository",
+                                "constructInfo": {
+                                  "fqn": "@aws-cdk/aws-ecr.RepositoryBase",
+                                  "version": "1.109.0"
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-ecr-assets.DockerImageAsset",
+                              "version": "1.109.0"
+                            }
+                          },
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                              "aws:cdk:cloudformation:props": {
+                                "code": {
+                                  "imageUri": {
+                                    "Fn::Sub": "${AWS::AccountId}.dkr.ecr.${AWS::Region}.${AWS::URLSuffix}/cdk-hnb659fds-container-assets-${AWS::AccountId}-${AWS::Region}:07097ffd55beebbc7493101247d5d334236a3490cc870256eb50667b137d1b01"
+                                  }
+                                },
+                                "role": {
+                                  "Fn::GetAtt": [
+                                    "backendbackendpredictinglambdaServiceRoleC15536D9",
+                                    "Arn"
+                                  ]
+                                },
+                                "environment": {
+                                  "variables": {
+                                    "CREDENTIALS": "/google/admin/credentials",
+                                    "SNS": {
+                                      "Ref": "backendbackendpredictinglambdasnstopicD0E78111"
+                                    },
+                                    "CODE_GURU_PROFILING_GROUP": {
+                                      "Ref": "backendbackendpredictinglambdaprofilinggroupProfilingGroup594CE7AB"
+                                    }
+                                  }
+                                },
+                                "memorySize": 10240,
+                                "packageType": "Image",
+                                "timeout": 8
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-lambda.CfnFunction",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-lambda.Function",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend-predicting-lambda-get-ssm-environment-variable": {
+                        "id": "backend-predicting-lambda-get-ssm-environment-variable",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-get-ssm-environment-variable",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-get-ssm-environment-variable/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "ssm:GetParameter*",
+                                      "Effect": "Allow",
+                                      "Resource": "arn:aws:ssm:eu-central-1:559706524079:parameter/google/admin/credentials"
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "backendbackendpredictinglambdagetssmenvironmentvariableDE83DCCE",
+                                "roles": [
+                                  {
+                                    "Ref": "backendbackendpredictinglambdaServiceRoleC15536D9"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend-predicting-lambda-publish-to-sns": {
+                        "id": "backend-predicting-lambda-publish-to-sns",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-publish-to-sns",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-publish-to-sns/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                              "aws:cdk:cloudformation:props": {
+                                "policyDocument": {
+                                  "Statement": [
+                                    {
+                                      "Action": "sns:Publish",
+                                      "Effect": "Allow",
+                                      "Resource": {
+                                        "Ref": "backendbackendpredictinglambdasnstopicD0E78111"
+                                      }
+                                    }
+                                  ],
+                                  "Version": "2012-10-17"
+                                },
+                                "policyName": "backendbackendpredictinglambdapublishtosnsF37F4350",
+                                "roles": [
+                                  {
+                                    "Ref": "backendbackendpredictinglambdaServiceRoleC15536D9"
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-iam.CfnPolicy",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-iam.Policy",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend-predicting-lambda-arn": {
+                        "id": "backend-predicting-lambda-arn",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-arn",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.CfnOutput",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "backend-predicting-lambda-topic-arn": {
+                        "id": "backend-predicting-lambda-topic-arn",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-topic-arn",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.CfnOutput",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "Rule": {
+                        "id": "Rule",
+                        "path": "MlOpsPipeline/Deploy/backend/backend/Rule",
+                        "children": {
+                          "Resource": {
+                            "id": "Resource",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/Rule/Resource",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Events::Rule",
+                              "aws:cdk:cloudformation:props": {
+                                "scheduleExpression": "rate(5 minutes)",
+                                "state": "ENABLED",
+                                "targets": [
+                                  {
+                                    "id": "Target0",
+                                    "arn": {
+                                      "Fn::GetAtt": [
+                                        "backendbackendpredictinglambdaD04E26B9",
+                                        "Arn"
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-events.CfnRule",
+                              "version": "1.109.0"
+                            }
+                          },
+                          "AllowEventRuleMlOpsPipelineDeploybackendbackendpredictinglambda91DF8E8E": {
+                            "id": "AllowEventRuleMlOpsPipelineDeploybackendbackendpredictinglambda91DF8E8E",
+                            "path": "MlOpsPipeline/Deploy/backend/backend/Rule/AllowEventRuleMlOpsPipelineDeploybackendbackendpredictinglambda91DF8E8E",
+                            "attributes": {
+                              "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                              "aws:cdk:cloudformation:props": {
+                                "action": "lambda:InvokeFunction",
+                                "functionName": {
+                                  "Fn::GetAtt": [
+                                    "backendbackendpredictinglambdaD04E26B9",
+                                    "Arn"
+                                  ]
+                                },
+                                "principal": "events.amazonaws.com",
+                                "sourceArn": {
+                                  "Fn::GetAtt": [
+                                    "backendRule0E27F791",
+                                    "Arn"
+                                  ]
+                                }
+                              }
+                            },
+                            "constructInfo": {
+                              "fqn": "@aws-cdk/aws-lambda.CfnPermission",
+                              "version": "1.109.0"
+                            }
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/aws-events.Rule",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "CDKMetadata": {
+                    "id": "CDKMetadata",
+                    "path": "MlOpsPipeline/Deploy/backend/CDKMetadata",
+                    "children": {
+                      "Default": {
+                        "id": "Default",
+                        "path": "MlOpsPipeline/Deploy/backend/CDKMetadata/Default",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.CfnResource",
+                          "version": "1.109.0"
+                        }
+                      },
+                      "Condition": {
+                        "id": "Condition",
+                        "path": "MlOpsPipeline/Deploy/backend/CDKMetadata/Condition",
+                        "constructInfo": {
+                          "fqn": "@aws-cdk/core.CfnCondition",
+                          "version": "1.109.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.Construct",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "BootstrapVersion": {
+                    "id": "BootstrapVersion",
+                    "path": "MlOpsPipeline/Deploy/backend/BootstrapVersion",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnParameter",
+                      "version": "1.109.0"
+                    }
+                  },
+                  "CheckBootstrapVersion": {
+                    "id": "CheckBootstrapVersion",
+                    "path": "MlOpsPipeline/Deploy/backend/CheckBootstrapVersion",
+                    "constructInfo": {
+                      "fqn": "@aws-cdk/core.CfnRule",
+                      "version": "1.109.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.Stack",
+                  "version": "1.109.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Stage",
+              "version": "1.109.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "MlOpsPipeline/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "MlOpsPipeline/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnResource",
+                  "version": "1.109.0"
+                }
+              },
+              "Condition": {
+                "id": "Condition",
+                "path": "MlOpsPipeline/CDKMetadata/Condition",
+                "constructInfo": {
+                  "fqn": "@aws-cdk/core.CfnCondition",
+                  "version": "1.109.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "@aws-cdk/core.Construct",
+              "version": "1.109.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "@aws-cdk/core.Stack",
+          "version": "1.109.0"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "@aws-cdk/core.App",
+      "version": "1.109.0"
+    }
+  }
+}

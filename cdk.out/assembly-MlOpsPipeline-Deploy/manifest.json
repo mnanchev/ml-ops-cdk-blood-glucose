@@ -1,0 +1,530 @@
+{
+  "version": "12.0.0",
+  "artifacts": {
+    "MlOpsPipelineDeploybackendB011FA9E.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "MlOpsPipelineDeploybackendB011FA9E.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "MlOpsPipelineDeploybackendB011FA9E": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "MlOpsPipelineDeploybackendB011FA9E.template.json",
+        "validateOnSynth": true,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1d4ef3105ab245434cae1ec55f1bd6a58a8891d0fa8fa00d59601933b2b583ee.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "MlOpsPipelineDeploybackendB011FA9E.assets"
+        ],
+        "stackName": "Deploy-backend"
+      },
+      "dependencies": [
+        "MlOpsPipelineDeploybackendB011FA9E.assets"
+      ],
+      "metadata": {
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdaprofilinggroupProfilingGroup594CE7AB",
+            "trace": [
+              "new ProfilingGroup (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-codeguruprofiler/lib/profiling-group.ts:103:28)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:30:28)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdasnstopicD0E78111",
+            "trace": [
+              "new Topic (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-sns/lib/topic.ts:66:22)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:42:19)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic/+359898913413/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdasnstopic359898913413D41BE2F5",
+            "trace": [
+              "new Subscription (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-sns/lib/subscription.ts:70:5)",
+              "Topic.addSubscription (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-sns/lib/topic-base.ts:58:5)",
+              "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:46:13",
+              "Array.forEach (<anonymous>)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:45:25)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdaServiceRoleC15536D9",
+            "trace": [
+              "new Role (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-iam/lib/role.ts:192:18)",
+              "new Function (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-lambda/lib/function.ts:307:31)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:56:30)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdaServiceRoleDefaultPolicyF4F248EC",
+            "trace": [
+              "new Policy (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "Role.addToPrincipalPolicy (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-iam/lib/role.ts:229:28)",
+              "Function.addToPrincipal (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-iam/lib/grant.ts:92:61)",
+              "ProfilingGroup.grantPublish (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-codeguruprofiler/lib/profiling-group.ts:38:18)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:107:20)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdaD04E26B9",
+            "trace": [
+              "new Function (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-lambda/lib/function.ts:369:35)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:56:30)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-get-ssm-environment-variable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdagetssmenvironmentvariableDE83DCCE",
+            "trace": [
+              "new Policy (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:81:7)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-publish-to-sns/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdapublishtosnsF37F4350",
+            "trace": [
+              "new Policy (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-iam/lib/policy.ts:89:22)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:95:7)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "predictingLambda",
+            "trace": [
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:113:23)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-topic-arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendbackendpredictinglambdatopicarn187720A9",
+            "trace": [
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:118:5)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/Rule/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendRule0E27F791",
+            "trace": [
+              "new Rule (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-events/lib/rule.ts:70:22)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:121:18)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/backend/Rule/AllowEventRuleMlOpsPipelineDeploybackendbackendpredictinglambda91DF8E8E": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "backendRuleAllowEventRuleMlOpsPipelineDeploybackendbackendpredictinglambda91DF8E8EB6E07545",
+            "trace": [
+              "Function.addPermission (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-lambda/lib/function-base.ts:130:5)",
+              "Object.addLambdaPermission (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-events-targets/lib/util.ts:78:13)",
+              "LambdaFunction.bind (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-events-targets/lib/lambda.ts:20:5)",
+              "Rule.addTarget (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/aws-events/lib/rule.ts:101:32)",
+              "new LambdaBackendConstruct (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/1_backend/LambdaBackendConstruct.ts:124:10)",
+              "new BackendStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/backend-stack.ts:15:5)",
+              "new MlOpsPipelineStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stage.ts:26:5)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:36:20)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata",
+            "trace": [
+              "new MetadataResource (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:22:24)",
+              "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:140:5",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:202:5)",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:198:5)",
+              "injectMetadataResources (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:131:3)",
+              "Object.synthesize (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "MlOpsPipelineStage.synth (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "CdkStage.addApplication (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/stage.ts:53:26)",
+              "CdkPipeline.addApplicationStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/pipeline.ts:153:11)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:37:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable",
+            "trace": [
+              "new MetadataResource (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/metadata-resource.ts:31:27)",
+              "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:140:5",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:202:5)",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:198:5)",
+              "injectMetadataResources (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:131:3)",
+              "Object.synthesize (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:18:3)",
+              "MlOpsPipelineStage.synth (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "CdkStage.addApplication (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/stage.ts:53:26)",
+              "CdkPipeline.addApplicationStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/pipeline.ts:153:11)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:37:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion",
+            "trace": [
+              "addBootstrapVersionRule (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stack-synthesizers/default-synthesizer.ts:447:17)",
+              "DefaultStackSynthesizer.synthesize (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stack-synthesizers/default-synthesizer.ts:274:7)",
+              "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:158:29",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:202:5)",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:198:5)",
+              "synthesizeTree (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:150:3)",
+              "Object.synthesize (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:39:3)",
+              "MlOpsPipelineStage.synth (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "CdkStage.addApplication (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/stage.ts:53:26)",
+              "CdkPipeline.addApplicationStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/pipeline.ts:153:11)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:37:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/MlOpsPipeline/Deploy/backend/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion",
+            "trace": [
+              "addBootstrapVersionRule (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stack-synthesizers/default-synthesizer.ts:457:3)",
+              "DefaultStackSynthesizer.synthesize (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stack-synthesizers/default-synthesizer.ts:274:7)",
+              "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:158:29",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:202:5)",
+              "visit (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:198:5)",
+              "synthesizeTree (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:150:3)",
+              "Object.synthesize (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/private/synthesis.ts:39:3)",
+              "MlOpsPipelineStage.synth (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/core/lib/stage.ts:94:23)",
+              "CdkStage.addApplication (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/stage.ts:53:26)",
+              "CdkPipeline.addApplicationStage (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/@aws-cdk/pipelines/lib/pipeline.ts:153:11)",
+              "new MlOpsPipelineStack (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/lib/ml-ops-pipeline-stack.ts:37:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/bin/iac.ts:6:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Module.m._compile (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1056:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/index.ts:1059:12)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "main (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:198:14)",
+              "Object.<anonymous> (/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/ts-node/src/bin.ts:288:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1109:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1138:10)",
+              "Module.load (node:internal/modules/cjs/loader:989:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:829:14)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ]
+      },
+      "displayName": "MlOpsPipeline/Deploy/backend"
+    }
+  }
+}
