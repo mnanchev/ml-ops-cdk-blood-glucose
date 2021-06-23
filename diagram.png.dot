@@ -27,10 +27,10 @@ digraph "Diagram" {
     fontsize = 8,
     margin = 8,
   ];
-  subgraph "backend" {
-    subgraph "cluster-SubGraph.backend" {
+  subgraph "MlOpsPipeline" {
+    subgraph "cluster-SubGraph.MlOpsPipeline" {
       graph [
-        label = "backend",
+        label = "MlOpsPipeline",
         labelloc = "b",
         labeljust = "l",
         margin = "10",
@@ -40,9 +40,22 @@ digraph "Diagram" {
         style = "filled,rounded",
         fillcolor = "#e4e4e4",
       ];
-      subgraph "cluster-SubGraph.backend" {
+      "MlOpsPipeline/MlOpsPipelineRepo" [
+        label = " MlOpsPipelineRepo",
+        fontsize = 12,
+        image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Developer- Tools/64/Arch_AWS-CodeCommit_64@5x.png",
+        imagescale = "true",
+        imagepos = "tc",
+        penwidth = "0",
+        shape = "node",
+        fixedsize = "true",
+        labelloc = "b",
+        width = 1.2,
+        height = 1.466,
+      ];
+      subgraph "cluster-SubGraph.MlOpsPipeline" {
         graph [
-          label = "backend",
+          label = "MlOpsPipeline",
           labelloc = "b",
           labeljust = "l",
           margin = "10",
@@ -52,62 +65,10 @@ digraph "Diagram" {
           style = "filled,rounded",
           fillcolor = "#d6d6d6",
         ];
-        "backend/backend/backend-predicting-lambda-sns-topic" [
-          label = " backend predicting\nlambda sns topic",
+        "MlOpsPipeline/MlOpsPipeline/Pipeline" [
+          label = " Pipeline",
           fontsize = 12,
-          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Simple-Notification-Service_64@5x.png",
-          imagescale = "true",
-          imagepos = "tc",
-          penwidth = "0",
-          shape = "node",
-          fixedsize = "true",
-          labelloc = "b",
-          width = 2,
-          height = 2.4819999999999998,
-        ];
-        "backend/backend/backend-predicting-lambda" [
-          label = " backend predicting\nlambda",
-          fontsize = 12,
-          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
-          imagescale = "true",
-          imagepos = "tc",
-          penwidth = "0",
-          shape = "node",
-          fixedsize = "true",
-          labelloc = "b",
-          width = 2,
-          height = 2.4819999999999998,
-        ];
-        "backend/backend/backend-predicting-lambda-get-ssm-environment-variable" [
-          label = " backend predicting\nlambda get ssm\nenvironment variable",
-          fontsize = 12,
-          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
-          imagescale = "true",
-          imagepos = "tc",
-          penwidth = "0",
-          shape = "node",
-          fixedsize = "true",
-          labelloc = "b",
-          width = 1.2,
-          height = 1.898,
-        ];
-        "backend/backend/backend-predicting-lambda-publish-to-sns" [
-          label = " backend predicting\nlambda publish to sns",
-          fontsize = 12,
-          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
-          imagescale = "true",
-          imagepos = "tc",
-          penwidth = "0",
-          shape = "node",
-          fixedsize = "true",
-          labelloc = "b",
-          width = 1.2,
-          height = 1.682,
-        ];
-        "backend/backend/Rule" [
-          label = " Rule",
-          fontsize = 12,
-          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Developer- Tools/64/Arch_AWS-CodePipeline_64@5x.png",
           imagescale = "true",
           imagepos = "tc",
           penwidth = "0",
@@ -117,29 +78,212 @@ digraph "Diagram" {
           width = 1.2,
           height = 1.466,
         ];
-        "backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup" [
-          label = " CODEGURUPROFILER\nPROFILINGGROUP\nProfilingGroup",
+        "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation" [
+          label = " SelfMutation",
           fontsize = 12,
+          image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Developer- Tools/64/Arch_Amazon-CodeBuild_64@5x.png",
+          imagescale = "true",
+          imagepos = "tc",
+          penwidth = "0",
+          shape = "node",
+          fixedsize = "true",
+          labelloc = "b",
+          width = 1.2,
+          height = 1.466,
         ];
+        subgraph "cluster-SubGraph.Assets" {
+          graph [
+            label = "Assets",
+            labelloc = "b",
+            labeljust = "l",
+            margin = "10",
+            fontsize = "16",
+            penwidth = "2",
+            pencolor = "#888888",
+            style = "filled,rounded",
+            fillcolor = "#c7c7c7",
+          ];
+          "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole" [
+            label = " DockerRole",
+            fontsize = 12,
+            image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
+            imagescale = "true",
+            imagepos = "tc",
+            penwidth = "0",
+            shape = "node",
+            fixedsize = "true",
+            labelloc = "b",
+            width = 1.2,
+            height = 1.466,
+          ];
+          "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1/Default" [
+            label = " Default",
+            fontsize = 12,
+            image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Developer- Tools/64/Arch_Amazon-CodeBuild_64@5x.png",
+            imagescale = "true",
+            imagepos = "tc",
+            penwidth = "0",
+            shape = "node",
+            fixedsize = "true",
+            labelloc = "b",
+            width = 1.2,
+            height = 1.466,
+          ];
+        }
+      }
+      subgraph "cluster-SubGraph.Deploy" {
+        graph [
+          label = "Deploy",
+          labelloc = "b",
+          labeljust = "l",
+          margin = "10",
+          fontsize = "16",
+          penwidth = "2",
+          pencolor = "#888888",
+          style = "filled,rounded",
+          fillcolor = "#d6d6d6",
+        ];
+        subgraph "cluster-SubGraph.backend" {
+          graph [
+            label = "backend",
+            labelloc = "b",
+            labeljust = "l",
+            margin = "10",
+            fontsize = "16",
+            penwidth = "2",
+            pencolor = "#888888",
+            style = "filled,rounded",
+            fillcolor = "#c7c7c7",
+          ];
+          subgraph "cluster-SubGraph.backend" {
+            graph [
+              label = "backend",
+              labelloc = "b",
+              labeljust = "l",
+              margin = "10",
+              fontsize = "16",
+              penwidth = "2",
+              pencolor = "#888888",
+              style = "filled,rounded",
+              fillcolor = "#b9b9b9",
+            ];
+            "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic" [
+              label = " backend predicting\nlambda sns topic",
+              fontsize = 12,
+              image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_AWS-Simple-Notification-Service_64@5x.png",
+              imagescale = "true",
+              imagepos = "tc",
+              penwidth = "0",
+              shape = "node",
+              fixedsize = "true",
+              labelloc = "b",
+              width = 2,
+              height = 2.4819999999999998,
+            ];
+            "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda" [
+              label = " backend predicting\nlambda",
+              fontsize = 12,
+              image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Compute/64/Arch_AWS-Lambda_64@5x.png",
+              imagescale = "true",
+              imagepos = "tc",
+              penwidth = "0",
+              shape = "node",
+              fixedsize = "true",
+              labelloc = "b",
+              width = 2,
+              height = 2.4819999999999998,
+            ];
+            "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-get-ssm-environment-variable" [
+              label = " backend predicting\nlambda get ssm\nenvironment variable",
+              fontsize = 12,
+              image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
+              imagescale = "true",
+              imagepos = "tc",
+              penwidth = "0",
+              shape = "node",
+              fixedsize = "true",
+              labelloc = "b",
+              width = 1.2,
+              height = 1.898,
+            ];
+            "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-publish-to-sns" [
+              label = " backend predicting\nlambda publish to sns",
+              fontsize = 12,
+              image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_Security-Identity-Compliance/64/Arch_AWS-Identity-and-Access-Management_64@5x.png",
+              imagescale = "true",
+              imagepos = "tc",
+              penwidth = "0",
+              shape = "node",
+              fixedsize = "true",
+              labelloc = "b",
+              width = 1.2,
+              height = 1.682,
+            ];
+            "MlOpsPipeline/Deploy/backend/backend/Rule" [
+              label = " Rule",
+              fontsize = 12,
+              image = "/Users/martin/PycharmProjects/ml-ops-cdk-blood-glucose/iac/node_modules/cdk-dia/icons/aws/Service/Arch_App-Integration/Arch_64/Arch_Amazon-EventBridge_64@5x.png",
+              imagescale = "true",
+              imagepos = "tc",
+              penwidth = "0",
+              shape = "node",
+              fixedsize = "true",
+              labelloc = "b",
+              width = 1.2,
+              height = 1.466,
+            ];
+            "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup" [
+              label = " CODEGURUPROFILER\nPROFILINGGROUP\nProfilingGroup",
+              fontsize = 12,
+            ];
+          }
+        }
       }
     }
   }
-  "backend/backend/backend-predicting-lambda" -> "backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup" [
+  "MlOpsPipeline/MlOpsPipelineRepo" -> "MlOpsPipeline/MlOpsPipeline/Pipeline" [
     dir = "both",
   ];
-  "backend/backend/backend-predicting-lambda" -> "backend/backend/backend-predicting-lambda-sns-topic" [
+  "MlOpsPipeline/MlOpsPipeline/Pipeline" -> "MlOpsPipeline/MlOpsPipelineRepo" [
     dir = "both",
   ];
-  "backend/backend/backend-predicting-lambda-get-ssm-environment-variable" -> "backend/backend/backend-predicting-lambda" [
+  "MlOpsPipeline/MlOpsPipeline/Pipeline" -> "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation" [
     dir = "both",
   ];
-  "backend/backend/backend-predicting-lambda-publish-to-sns" -> "backend/backend/backend-predicting-lambda-sns-topic" [
+  "MlOpsPipeline/MlOpsPipeline/Pipeline" -> "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole" [
     dir = "both",
   ];
-  "backend/backend/backend-predicting-lambda-publish-to-sns" -> "backend/backend/backend-predicting-lambda" [
+  "MlOpsPipeline/MlOpsPipeline/Pipeline" -> "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1/Default" [
     dir = "both",
   ];
-  "backend/backend/Rule" -> "backend/backend/backend-predicting-lambda" [
+  "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole" -> "MlOpsPipeline/MlOpsPipeline/Pipeline" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1/Default" -> "MlOpsPipeline/MlOpsPipeline/Pipeline" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/MlOpsPipeline/Assets/DockerAsset1/Default" -> "MlOpsPipeline/MlOpsPipeline/Assets/DockerRole" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/MlOpsPipeline/UpdatePipeline/SelfMutation" -> "MlOpsPipeline/MlOpsPipeline/Pipeline" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda" -> "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-profiling-group/ProfilingGroup" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda" -> "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-get-ssm-environment-variable" -> "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-publish-to-sns" -> "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-sns-topic" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda-publish-to-sns" -> "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda" [
+    dir = "both",
+  ];
+  "MlOpsPipeline/Deploy/backend/backend/Rule" -> "MlOpsPipeline/Deploy/backend/backend/backend-predicting-lambda" [
     dir = "both",
   ];
 }
