@@ -30,7 +30,7 @@ export class MlOpsPipelineStack extends cdk.Stack {
         cloudAssemblyArtifact,
         subdirectory: "iac",
         actionName: "Build",
-        installCommand: "cd iac && pwd && npm install && ls -alh",
+        buildCommand: "npm install && npm run build && docker version",
       }),
     });
     const deploy = new MlOpsPipelineStage(this, "Deploy");
