@@ -47,3 +47,5 @@ yarn-error.log
 /.versionrc.json
 *.js
 !_*.js
+*.d.ts
+!_*.d.ts
