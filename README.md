@@ -9,7 +9,7 @@
 
 # ML Ops pipeline for predicting blood glucose from google spreadsheet
 ML solution to predict blood glucose based on AWS Lambda
-![Diagram of Architecture](./diagram.png)
+![Diagram of Architecture](diagram.png)
 
 The `cdk.json` file tells the CDK Toolkit how to execute MLOpsPipeline
 
