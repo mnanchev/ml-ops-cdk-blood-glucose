@@ -188,12 +188,11 @@ def handler(event, context):
     rcf_pred = ML_MODELS[1].predict(last_prediction_data)[0]
     lr_pred = ML_MODELS[0].predict(last_prediction_data)[0][0]
     current_blood_glucose = last_prediction_data["var1(t+2)"].values[0]
-    average_prediction = (rcf_pred + lr_pred) / 2
     predicted_value = {
         "current": current_blood_glucose,
         "linear_prediction": lr_pred,
         "random_cut_forest_prediction": rcf_pred,
-        "average_prediction": average_prediction
+        "average_prediction": (rcf_pred + lr_pred) / 2
     }
     if float(current_blood_glucose) < 3.7:
         message = {"BLOOD_GLUCOSE_LOW_CRITIC": current_blood_glucose}

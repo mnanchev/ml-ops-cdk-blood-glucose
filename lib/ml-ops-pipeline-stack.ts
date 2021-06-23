@@ -19,7 +19,7 @@ export class MlOpsPipelineStack extends cdk.Stack {
       cloudAssemblyArtifact,
 
       sourceAction: new CodeCommitSourceAction({
-        actionName: "CodeCommit",
+        actionName: "GetSource",
         output: sourceArtifact,
         repository: ml_repo,
         branch: "main",
@@ -28,11 +28,12 @@ export class MlOpsPipelineStack extends cdk.Stack {
       synthAction: SimpleSynthAction.standardNpmSynth({
         sourceArtifact,
         cloudAssemblyArtifact,
-        actionName: "Build",
-        buildCommand: "npm install && npm run build",
+        actionName: "BuildAndTest",
+        installCommand: "npm install",
+        buildCommand: "npm run build && npm test",
       }),
     });
-    const deploy = new MlOpsPipelineStage(this, "Deploy");
+    const deploy = new MlOpsPipelineStage(this, "PrepareAndDeploy");
     pipeline.addApplicationStage(deploy);
   }
 }
