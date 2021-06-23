@@ -2,7 +2,7 @@ import * as cdk from "@aws-cdk/core";
 import { Repository } from "@aws-cdk/aws-codecommit";
 import { CodeCommitSourceAction } from "@aws-cdk/aws-codepipeline-actions";
 import { Artifact } from "@aws-cdk/aws-codepipeline";
-import { SimpleSynthAction, CdkPipeline,  } from "@aws-cdk/pipelines";
+import { SimpleSynthAction, CdkPipeline } from "@aws-cdk/pipelines";
 import { MlOpsPipelineStage } from "./ml-ops-pipeline-stage";
 
 export class MlOpsPipelineStack extends cdk.Stack {
