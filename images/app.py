@@ -202,9 +202,9 @@ def handler(event, context):
             'dateTime': now.strftime("%Y%m%d%H%M%S"),
             'bloodGlucose': Decimal(current_blood_glucose),
             'prediction': {
-                "linear_prediction": Decimal(lr_pred),
-                "random_cut_forest_prediction": Decimal(rcf_pred),
-                "average_prediction": Decimal((rcf_pred + lr_pred) / 2)
+                "linear_prediction": Decimal(str(lr_pred)),
+                "random_cut_forest_prediction": Decimal(str(rcf_pred)),
+                "average_prediction": Decimal(str((rcf_pred + lr_pred) / 2))
             }
         })
     return response
