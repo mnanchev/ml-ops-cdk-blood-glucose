@@ -1,6 +1,6 @@
 import { CfnOutput, Construct, Duration, StackProps } from "@aws-cdk/core";
 import { Code, Function, Handler, Runtime } from "@aws-cdk/aws-lambda";
-import { ManagedPolicy, Policy, PolicyStatement } from "@aws-cdk/aws-iam";
+import { Policy, PolicyStatement } from "@aws-cdk/aws-iam";
 import { Topic } from "@aws-cdk/aws-sns";
 import { ComputePlatform, ProfilingGroup } from "@aws-cdk/aws-codeguruprofiler";
 import { SmsSubscription } from "@aws-cdk/aws-sns-subscriptions";
@@ -15,7 +15,6 @@ export interface BackendConfigDecorator extends StackProps {
   readonly parameterStoreCredentialsGoogle: string;
   readonly timeout: number;
   readonly environment: string;
-  readonly profilingGroupsPermissions: string;
   readonly predictingLambdaExportName: string;
   readonly mobileNumbers: Array<string>;
 }
@@ -114,9 +113,6 @@ export class LambdaBackendConstruct extends Construct {
     //  Permissions to talk to code guru agent
     //
     // =========================================
-    predictingLambda.role?.addManagedPolicy(
-      ManagedPolicy.fromAwsManagedPolicyName(props.profilingGroupsPermissions)
-    );
     profilingGroup.grantPublish(predictingLambda);
     // =========================================
     //

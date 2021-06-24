@@ -4,7 +4,6 @@ export enum Backend {
   memory = 10240,
   parameterStoreCredentialsGoogle = "/google/admin/credentials",
   codeLocation = "images",
-  profilingGroupPermissions = "AmazonCodeGuruProfilerFullAccess",
   predictingLambdaExportName = "predictingLambda",
   timeout = 8,
 }
