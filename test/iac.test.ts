@@ -163,7 +163,7 @@ test("λ has permission to write to dynamoDB ", () => {
             Resource: [
               {
                 "Fn::GetAtt": [
-                  "MyTestCodeGuruStackbackendpredictinglambdabloodglucoseF148083A",
+                  "MyTestDynamoDBStackbackendpredictinglambdabloodglucose11E3B269",
                   "Arn",
                 ],
               },
@@ -180,7 +180,7 @@ test("λ has permission to write to dynamoDB ", () => {
             Effect: "Allow",
             Resource: {
               "Fn::GetAtt": [
-                "MyTestCodeGuruStackbackendpredictinglambdaprofilinggroupProfilingGroupBE5BDDF2",
+                "MyTestDynamoDBStackbackendpredictinglambdaprofilinggroupProfilingGroup79C080E4",
                 "Arn",
               ],
             },
