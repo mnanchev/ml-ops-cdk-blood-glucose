@@ -48,7 +48,7 @@ test("λ has environment variables", () => {
 test("λ has permission to post code guru profile", () => {
   const stack = new Iac.BackendStack(
     new cdk.App(),
-    "MyTestStack",
+    "MyTestCodeGuruStack",
     backendStackConfig
   );
   expectCDK(stack).to(
@@ -59,6 +59,7 @@ test("λ has permission to post code guru profile", () => {
             Action: [
               "codeguru-profiler:ConfigureAgent",
               "codeguru-profiler:PostAgentProfile",
+              "codeguru-profiler:CreateProfilingGroup",
             ],
             Effect: "Allow",
             Resource: {
