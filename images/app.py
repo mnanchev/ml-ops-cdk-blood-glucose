@@ -4,24 +4,24 @@ predict blood glucose for next 30 minutes
 """
 from json import loads, dumps
 from os import environ
-from boto3 import client
+from datetime import datetime
+from boto3 import client, resource
 from gspread import authorize
 from joblib import load
 from numpy import NaN, array
 from pandas import DataFrame, to_datetime, concat
 from oauth2client.service_account import ServiceAccountCredentials
 from codeguru_profiler_agent import with_lambda_profiler
-
 # Boto3 Clients
 
 SSM_CLIENT = client("ssm")
 SNS_CLIENT = client("sns")
-
+DYNAMO_DB_CLIENT = resource('dynamodb')
 # Topic arn and profilingGroup
 
 TOPIC_ARN = environ["SNS"]
 PROFILING_GROUP = environ["CODE_GURU_PROFILING_GROUP"]
-
+TABLE = environ["DYNAMO_DB"]
 # Google credentials
 
 PARAM_NAME = environ['CREDENTIALS']
@@ -188,16 +188,22 @@ def handler(event, context):
     rcf_pred = ML_MODELS[1].predict(last_prediction_data)[0]
     lr_pred = ML_MODELS[0].predict(last_prediction_data)[0][0]
     current_blood_glucose = last_prediction_data["var1(t+2)"].values[0]
-    predicted_value = {
-        "current": current_blood_glucose,
-        "linear_prediction": lr_pred,
-        "random_cut_forest_prediction": rcf_pred,
-        "average_prediction": (rcf_pred + lr_pred) / 2
-    }
     if float(current_blood_glucose) < 3.7:
         message = {"BLOOD_GLUCOSE_LOW_CRITIC": current_blood_glucose}
         SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
     elif float(current_blood_glucose) > 11.0:
         message = {"BLOOD_GLUCOSE_HIGH_CRITIC": current_blood_glucose}
         SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
-    return predicted_value
+    table = DYNAMO_DB_CLIENT.Table(TABLE)
+    now = datetime.now()
+    response = table.put_item(
+        Item={
+            'dateTime': now.strftime("%Y%m%d%H%M%S"),
+            'bloodGlucose': current_blood_glucose,
+            'prediction': {
+                "linear_prediction": lr_pred,
+                "random_cut_forest_prediction": rcf_pred,
+                "average_prediction": (rcf_pred + lr_pred) / 2
+            }
+        })
+    return response

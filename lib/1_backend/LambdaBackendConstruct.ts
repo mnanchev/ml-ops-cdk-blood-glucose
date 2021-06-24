@@ -6,6 +6,7 @@ import { ComputePlatform, ProfilingGroup } from "@aws-cdk/aws-codeguruprofiler";
 import { SmsSubscription } from "@aws-cdk/aws-sns-subscriptions";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { LambdaFunction } from "@aws-cdk/aws-events-targets";
+import { AttributeType, Table } from "@aws-cdk/aws-dynamodb";
 
 export interface BackendConfigDecorator extends StackProps {
   readonly codeLocation: string;
@@ -22,6 +23,16 @@ export interface BackendConfigDecorator extends StackProps {
 export class LambdaBackendConstruct extends Construct {
   constructor(scope: Construct, id: string, props: BackendConfigDecorator) {
     super(scope, id);
+    // =========================================
+    //
+    //  DynamoDb Table
+    //
+    // =========================================
+    const table = new Table(this, `${props.solution}-blood-glucose`, {
+      tableName: props.predictingLambdaExportName,
+      partitionKey: { name: "dateTime", type: AttributeType.STRING },
+      sortKey: { name: "bloodGlucose", type: AttributeType.NUMBER },
+    });
     // =========================================
     //
     //  Code Guru Profiling group
@@ -62,9 +73,11 @@ export class LambdaBackendConstruct extends Construct {
         CREDENTIALS: parameterStoreCredentialsGoogle,
         SNS: `${topic.topicArn}`,
         CODE_GURU_PROFILING_GROUP: profilingGroup.profilingGroupName,
+        DYNAMO_DB: table.tableName,
       },
       timeout: Duration.seconds(props.timeout),
     });
+    table.grantFullAccess(predictingLambda);
     // =========================================
     //
     //  Permissions to read from System Manager Parameter store
