@@ -57,14 +57,33 @@ test("λ has permission to post code guru profile", () => {
         Statement: [
           {
             Action: [
+              "dynamodb:BatchWriteItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem",
+            ],
+            Effect: "Allow",
+            Resource: [
+              {
+                "Fn::GetAtt": [
+                  "MyTestCodeGuruStackbackendpredictinglambdabloodglucoseF148083A",
+                  "Arn",
+                ],
+              },
+              {
+                Ref: "AWS::NoValue",
+              },
+            ],
+          },
+          {
+            Action: [
               "codeguru-profiler:ConfigureAgent",
               "codeguru-profiler:PostAgentProfile",
-              "codeguru-profiler:CreateProfilingGroup",
             ],
             Effect: "Allow",
             Resource: {
               "Fn::GetAtt": [
-                "MyTestStackbackendpredictinglambdaprofilinggroupProfilingGroupBD913E17",
+                "MyTestCodeGuruStackbackendpredictinglambdaprofilinggroupProfilingGroupBE5BDDF2",
                 "Arn",
               ],
             },
