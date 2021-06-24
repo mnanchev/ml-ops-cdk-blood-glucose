@@ -120,6 +120,42 @@ test("λ has permission to read ssm parameter ", () => {
   );
 });
 
+test("λ has permission to write to dynamoDB ", () => {
+  const stack = new Iac.BackendStack(
+    new cdk.App(),
+    "MyTestDynamoDBStack",
+    backendStackConfig
+  );
+  expectCDK(stack).to(
+    haveResourceLike("AWS::IAM::Policy", {
+      PolicyDocument: {
+        Statement: [
+          {
+            Action: [
+              "dynamodb:BatchWriteItem",
+              "dynamodb:PutItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:DeleteItem",
+            ],
+            Effect: "Allow",
+            Resource: [
+              {
+                "Fn::GetAtt": [
+                  "MyTestStackbackendpredictinglambdabloodglucoseE08A7884",
+                  "Arn",
+                ],
+              },
+              {
+                Ref: "AWS::NoValue",
+              },
+            ],
+          },
+        ],
+      },
+    })
+  );
+});
+
 test("Stack has cloudwatch event rule", () => {
   const stack = new Iac.BackendStack(
     new cdk.App(),
