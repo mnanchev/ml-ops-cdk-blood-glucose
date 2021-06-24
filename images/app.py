@@ -197,14 +197,19 @@ def handler(event, context):
         SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
     table = DYNAMO_DB_CLIENT.Table(TABLE)
     now = datetime.now()
+    db_current = Decimal(current_blood_glucose)
+    db_pred_lr = Decimal(str(lr_pred))
+    db_pred_rcf = Decimal(str(rcf_pred))
+    db_ave = Decimal(str((rcf_pred + lr_pred) / 2))
+    print(db_current, db_pred_rcf, db_pred_lr, db_ave, now.strftime("%Y%m%d%H%M%S"))
     response = table.put_item(
         Item={
             'dateTime': now.strftime("%Y%m%d%H%M%S"),
-            'bloodGlucose': Decimal(current_blood_glucose),
+            'bloodGlucose': db_current,
             'prediction': {
-                "linear_prediction": Decimal(str(lr_pred)),
-                "random_cut_forest_prediction": Decimal(str(rcf_pred)),
-                "average_prediction": Decimal(str((rcf_pred + lr_pred) / 2))
+                "linear_prediction": db_pred_lr,
+                "random_cut_forest_prediction": db_pred_rcf,
+                "average_prediction": db_ave
             }
         })
     return response
