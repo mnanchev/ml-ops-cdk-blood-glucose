@@ -35,8 +35,10 @@ test("λ has environment variables", () => {
           CODE_GURU_PROFILING_GROUP: {
             Ref: "MyTestStackbackendpredictinglambdaprofilinggroupProfilingGroupBD913E17",
           },
-
           SNS: { Ref: "MyTestStackbackendpredictinglambdasnstopic52F11C32" },
+          DYNAMO_DB: {
+            Ref: "MyTestStackbackendpredictinglambdabloodglucoseE08A7884",
+          },
         },
       },
     })
