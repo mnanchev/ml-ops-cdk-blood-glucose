@@ -163,7 +163,7 @@ test("λ has permission to write to dynamoDB ", () => {
             Resource: [
               {
                 "Fn::GetAtt": [
-                  "MyTestStackbackendpredictinglambdabloodglucoseE08A7884",
+                  "MyTestCodeGuruStackbackendpredictinglambdabloodglucoseF148083A",
                   "Arn",
                 ],
               },
@@ -171,6 +171,19 @@ test("λ has permission to write to dynamoDB ", () => {
                 Ref: "AWS::NoValue",
               },
             ],
+          },
+          {
+            Action: [
+              "codeguru-profiler:ConfigureAgent",
+              "codeguru-profiler:PostAgentProfile",
+            ],
+            Effect: "Allow",
+            Resource: {
+              "Fn::GetAtt": [
+                "MyTestCodeGuruStackbackendpredictinglambdaprofilinggroupProfilingGroupBE5BDDF2",
+                "Arn",
+              ],
+            },
           },
         ],
       },
