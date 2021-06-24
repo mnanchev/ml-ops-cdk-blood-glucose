@@ -5,6 +5,7 @@ predict blood glucose for next 30 minutes
 from json import loads, dumps
 from os import environ
 from datetime import datetime
+from decimal import Decimal
 from boto3 import client, resource
 from gspread import authorize
 from joblib import load
@@ -199,11 +200,11 @@ def handler(event, context):
     response = table.put_item(
         Item={
             'dateTime': now.strftime("%Y%m%d%H%M%S"),
-            'bloodGlucose': current_blood_glucose,
+            'bloodGlucose': Decimal(current_blood_glucose),
             'prediction': {
-                "linear_prediction": lr_pred,
-                "random_cut_forest_prediction": rcf_pred,
-                "average_prediction": (rcf_pred + lr_pred) / 2
+                "linear_prediction": Decimal(lr_pred),
+                "random_cut_forest_prediction": Decimal(rcf_pred),
+                "average_prediction": Decimal((rcf_pred + lr_pred) / 2)
             }
         })
     return response

@@ -16,7 +16,6 @@ const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .codeLocation(Backend.codeLocation)
   .memorySize(Backend.memory)
   .environment(Backend.environment)
-  .profilingGroupsPermissions(Backend.profilingGroupPermissions)
   .predictingLambdaExportName(Backend.predictingLambdaExportName)
   .mobileNumbers(mobileNumbers)
   .build();
