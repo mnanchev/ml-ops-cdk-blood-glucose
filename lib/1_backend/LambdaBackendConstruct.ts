@@ -77,7 +77,7 @@ export class LambdaBackendConstruct extends Construct {
       },
       timeout: Duration.seconds(props.timeout),
     });
-    table.grantFullAccess(predictingLambda);
+    table.grantWriteData(predictingLambda);
     // =========================================
     //
     //  Permissions to read from System Manager Parameter store
