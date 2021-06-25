@@ -195,13 +195,22 @@ def handler(event, context):
     elif float(current_blood_glucose) > 11.0:
         message = {"BLOOD_GLUCOSE_HIGH_CRITIC": current_blood_glucose}
         SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
+    else:
+        message = {
+            "BLOOD_GLUCOSE": current_blood_glucose,
+            "BLOOD_GLUCOSE_PREDICTED_RCF": rcf_pred,
+            "BLOOD_GLUCOSE_PREDICTED_LR": lr_pred,
+        }
+        SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
+
     table = DYNAMO_DB_CLIENT.Table(TABLE)
     now = datetime.now()
     db_current = Decimal(str(round(current_blood_glucose, 2)))
     db_pred_lr = Decimal(str(round(lr_pred, 2)))
     db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
-    print(db_current, db_pred_rcf, db_pred_lr, db_ave, now.strftime("%Y%m%d%H%M%S"))
+    print(db_current, db_pred_rcf, db_pred_lr, db_ave,
+          now.strftime("%Y%m%d%H%M%S"))
     response = table.put_item(
         Item={
             'dateTime': now.strftime("%Y%m%d%H%M%S"),
