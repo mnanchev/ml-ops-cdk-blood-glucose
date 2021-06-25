@@ -198,9 +198,9 @@ def handler(event, context):
     table = DYNAMO_DB_CLIENT.Table(TABLE)
     now = datetime.now()
     db_current = Decimal(round(current_blood_glucose, 2))
-    db_pred_lr = Decimal(str(round(lr_pred), 2))
-    db_pred_rcf = Decimal(str(rcf_pred))
-    db_ave = Decimal(str(round((rcf_pred + lr_pred) / 2)))
+    db_pred_lr = Decimal(str(round(lr_pred, 2)))
+    db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
+    db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
     print(db_current, db_pred_rcf, db_pred_lr, db_ave, now.strftime("%Y%m%d%H%M%S"))
     response = table.put_item(
         Item={
