@@ -197,7 +197,7 @@ def handler(event, context):
         SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
     table = DYNAMO_DB_CLIENT.Table(TABLE)
     now = datetime.now()
-    db_current = Decimal(round(current_blood_glucose, 2))
+    db_current = Decimal(str(round(current_blood_glucose, 2)))
     db_pred_lr = Decimal(str(round(lr_pred, 2)))
     db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
