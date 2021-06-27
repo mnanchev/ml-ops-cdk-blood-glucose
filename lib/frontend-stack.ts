@@ -8,7 +8,7 @@ export class FrontendStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: StackProps) {
     super(scope, id, props);
     const asset = new Asset(this, "SkillAsset", {
-      path: path.join(__dirname, "frontend"),
+      path: path.join(__dirname, "2_frontend"),
     });
     const role = new Role(this, "Role", {
       assumedBy: new CompositePrincipal(
