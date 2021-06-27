@@ -26,7 +26,7 @@ export class FrontendStack extends cdk.Stack {
     role.addToPolicy(
       new PolicyStatement({
         actions: ["S3:GetObject"],
-        resources: [`arn:aws:s3:::${asset.s3BucketName}/${asset.s3ObjectKey}`],
+        resources: [`arn:aws:s3:::${asset.s3BucketName}/*`],
       })
     );
     // =========================================
