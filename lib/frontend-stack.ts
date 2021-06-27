@@ -2,8 +2,13 @@ import * as cdk from "@aws-cdk/core";
 import { CfnSkill } from "@aws-cdk/alexa-ask";
 import * as path from "path";
 import { Asset } from "@aws-cdk/aws-s3-assets";
-import {CompositePrincipal, PolicyStatement, Role, ServicePrincipal} from "@aws-cdk/aws-iam";
-import {StackProps} from "@aws-cdk/core";
+import {
+  CompositePrincipal,
+  PolicyStatement,
+  Role,
+  ServicePrincipal,
+} from "@aws-cdk/aws-iam";
+import { StackProps } from "@aws-cdk/core";
 export class FrontendStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: StackProps) {
     super(scope, id, props);

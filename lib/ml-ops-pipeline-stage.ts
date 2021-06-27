@@ -3,7 +3,7 @@ import { BackendStack } from "./backend-stack";
 import { StrictBuilder } from "builder-pattern";
 import { BackendConfigDecorator } from "./1_backend/LambdaBackendConstruct";
 import { Backend, mobileNumbers } from "./StackConfigs";
-import {FrontendStack} from "./frontend-stack";
+import { FrontendStack } from "./frontend-stack";
 
 export class MlOpsPipelineStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {
@@ -24,6 +24,6 @@ export class MlOpsPipelineStage extends Stage {
     //
     // =========================================
     new BackendStack(this, "backend", backendStackConfig);
-    new FrontendStack(this, "frontend",{});
+    new FrontendStack(this, "frontend", {});
   }
 }
