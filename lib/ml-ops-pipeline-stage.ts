@@ -2,7 +2,7 @@ import { Stage, Construct, StageProps } from "@aws-cdk/core";
 import { BackendStack } from "./backend-stack";
 import { StrictBuilder } from "builder-pattern";
 import { BackendConfigDecorator } from "./1_backend/LambdaBackendConstruct";
-import { Backend, mobileNumbers } from "./StackConfigs";
+import { Backend, emails, mobileNumbers } from "./StackConfigs";
 
 export class MlOpsPipelineStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {
@@ -16,6 +16,7 @@ export class MlOpsPipelineStage extends Stage {
       .environment(Backend.environment)
       .predictingLambdaExportName(Backend.predictingLambdaExportName)
       .mobileNumbers(mobileNumbers)
+      .emails(emails)
       .build();
     // =========================================
     //

@@ -7,7 +7,7 @@ import * as cdk from "@aws-cdk/core";
 import * as Iac from "../lib/backend-stack";
 import { StrictBuilder } from "builder-pattern";
 import { BackendConfigDecorator } from "../lib/1_backend/LambdaBackendConstruct";
-import { Backend, mobileNumbers } from "../lib/StackConfigs";
+import { Backend, emails, mobileNumbers } from "../lib/StackConfigs";
 
 const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .solution(Backend.solution)
@@ -18,6 +18,7 @@ const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .environment(Backend.environment)
   .predictingLambdaExportName(Backend.predictingLambdaExportName)
   .mobileNumbers(mobileNumbers)
+  .emails(emails)
   .build();
 
 test("λ has environment variables", () => {

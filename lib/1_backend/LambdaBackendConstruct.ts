@@ -3,7 +3,10 @@ import { Code, Function, Handler, Runtime } from "@aws-cdk/aws-lambda";
 import { Policy, PolicyStatement } from "@aws-cdk/aws-iam";
 import { Topic } from "@aws-cdk/aws-sns";
 import { ComputePlatform, ProfilingGroup } from "@aws-cdk/aws-codeguruprofiler";
-import { SmsSubscription } from "@aws-cdk/aws-sns-subscriptions";
+import {
+  EmailSubscription,
+  SmsSubscription,
+} from "@aws-cdk/aws-sns-subscriptions";
 import { Rule, Schedule } from "@aws-cdk/aws-events";
 import { LambdaFunction } from "@aws-cdk/aws-events-targets";
 import { AttributeType, Table } from "@aws-cdk/aws-dynamodb";
@@ -17,6 +20,7 @@ export interface BackendConfigDecorator extends StackProps {
   readonly environment: string;
   readonly predictingLambdaExportName: string;
   readonly mobileNumbers: Array<string>;
+  readonly emails: Array<string>;
 }
 
 export class LambdaBackendConstruct extends Construct {
@@ -55,7 +59,9 @@ export class LambdaBackendConstruct extends Construct {
     props.mobileNumbers.forEach(function (number) {
       topic.addSubscription(new SmsSubscription(number));
     });
-
+    props.emails.forEach(function (email: string) {
+      topic.addSubscription(new EmailSubscription(email));
+    });
     // =========================================
     //
     //  Lambda function creation

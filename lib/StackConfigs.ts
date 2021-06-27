@@ -9,3 +9,4 @@ export enum Backend {
 }
 
 export const mobileNumbers: Array<string> = ["+359898913413"];
+export const emails: Array<string> = ["martin2754@gmail.com"];
