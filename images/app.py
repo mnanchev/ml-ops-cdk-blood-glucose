@@ -190,9 +190,9 @@ def handler(event, context):
     lr_pred = ML_MODELS[0].predict(last_prediction_data)[0][0]
     current_blood_glucose = last_prediction_data["var1(t+2)"].values[0]
     message = {
-            "bloodGlucose": current_blood_glucose,
-            "random_cut_forest_prediction": rcf_pred,
-            "linear_prediction": lr_pred,
+        "bloodGlucose": current_blood_glucose,
+        "random_cut_forest_prediction": rcf_pred,
+        "linear_prediction": lr_pred,
     }
     SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
     table = DYNAMO_DB_CLIENT.Table(TABLE)
