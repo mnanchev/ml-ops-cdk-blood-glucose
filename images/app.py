@@ -189,19 +189,13 @@ def handler(event, context):
     rcf_pred = ML_MODELS[1].predict(last_prediction_data)[0]
     lr_pred = ML_MODELS[0].predict(last_prediction_data)[0][0]
     current_blood_glucose = last_prediction_data["var1(t+2)"].values[0]
-    if float(current_blood_glucose) < 3.7:
-        message = {"BLOOD_GLUCOSE_LOW_CRITIC": current_blood_glucose}
-        SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
-    elif float(current_blood_glucose) > 11.0:
-        message = {"BLOOD_GLUCOSE_HIGH_CRITIC": current_blood_glucose}
-        SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
-    else:
-        message = {
-            "BLOOD_GLUCOSE": current_blood_glucose,
-            "BLOOD_GLUCOSE_PREDICTED_RCF": rcf_pred,
-            "BLOOD_GLUCOSE_PREDICTED_LR": lr_pred,
-        }
-        SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
+
+    message = {
+        "bloodGlucose": current_blood_glucose,
+        "random_cut_forest_prediction": rcf_pred,
+        "linear_prediction": lr_pred,
+    }
+    SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
 
     table = DYNAMO_DB_CLIENT.Table(TABLE)
     now = datetime.now()
