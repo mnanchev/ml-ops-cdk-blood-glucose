@@ -23,6 +23,7 @@ DYNAMO_DB_CLIENT = resource('dynamodb')
 TOPIC_ARN = environ["SNS"]
 PROFILING_GROUP = environ["CODE_GURU_PROFILING_GROUP"]
 TABLE = environ["DYNAMO_DB"]
+DYNAMO_DB_CLIENT = DYNAMO_DB_CLIENT.Table(TABLE)
 # Google credentials
 
 PARAM_NAME = environ['CREDENTIALS']
@@ -184,8 +185,7 @@ def handler(event, context):
     data = clean_data(concatenated_data_frame).reset_index()
     data = array(data.BLOOD_GLUCOSE)
     cleaned_dataset = series_to_supervised(data.tolist(), n_out=3)
-    prediction_data = cleaned_dataset.drop(["var1(t-1)"], axis=1)
-    last_prediction_data = prediction_data.tail(1)
+    last_prediction_data = cleaned_dataset.drop(["var1(t-1)"], axis=1).tail(1)
     rcf_pred = ML_MODELS[1].predict(last_prediction_data)[0]
     lr_pred = ML_MODELS[0].predict(last_prediction_data)[0][0]
     current_blood_glucose = last_prediction_data["var1(t+2)"].values[0]
@@ -195,17 +195,13 @@ def handler(event, context):
         "linear_prediction": lr_pred,
     }
     SNS_CLIENT.publish(TopicArn=TOPIC_ARN, Message=dumps(message))
-    table = DYNAMO_DB_CLIENT.Table(TABLE)
-    now = datetime.now()
     db_current = Decimal(str(round(current_blood_glucose, 2)))
     db_pred_lr = Decimal(str(round(lr_pred, 2)))
     db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
-    print(db_current, db_pred_rcf, db_pred_lr, db_ave,
-          now.strftime("%Y%m%d%H%M%S"))
-    response = table.put_item(
+    response = DYNAMO_DB_CLIENT.put_item(
         Item={
-            'dateTime': now.strftime("%Y%m%d%H%M%S"),
+            'dateTime': datetime.now().strftime("%Y%m%d%H%M%S"),
             'bloodGlucose': db_current,
             'prediction': {
                 "linear_prediction": db_pred_lr,
