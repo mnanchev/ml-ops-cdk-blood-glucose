@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import "source-map-support/register";
-import * as cdk from "@aws-cdk/core";
+
 import { MlOpsPipelineStack } from "../lib/ml-ops-pipeline-stack";
-const app = new cdk.App();
+import {App} from "aws-cdk-lib";
+const app = new App();
 new MlOpsPipelineStack(app, "MlOpsPipeline");

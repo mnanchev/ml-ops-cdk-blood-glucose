@@ -3,11 +3,11 @@ import {
   haveResource,
   haveResourceLike,
 } from "@aws-cdk/assert";
-import * as cdk from "@aws-cdk/core";
-import * as Iac from "../lib/backend-stack";
 import { StrictBuilder } from "builder-pattern";
 import { BackendConfigDecorator } from "../lib/1_backend/LambdaBackendConstruct";
 import { Backend, emails, mobileNumbers } from "../lib/StackConfigs";
+import {BackendStack}  from "../lib/backend-stack";
+import {App} from "aws-cdk-lib";
 
 const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .solution(Backend.solution)
@@ -22,8 +22,8 @@ const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .build();
 
 test("λ has environment variables", () => {
-  const stack = new Iac.BackendStack(
-    new cdk.App(),
+  const stack = new BackendStack(
+    new App(),
     "MyTestStack",
     backendStackConfig
   );
@@ -46,8 +46,8 @@ test("λ has environment variables", () => {
 });
 
 test("λ has permission to post code guru profile", () => {
-  const stack = new Iac.BackendStack(
-    new cdk.App(),
+  const stack = new BackendStack(
+    new App(),
     "MyTestCodeGuruStack",
     backendStackConfig
   );
@@ -96,8 +96,8 @@ test("λ has permission to post code guru profile", () => {
 });
 
 test("λ has permission to publish to sns ", () => {
-  const stack = new Iac.BackendStack(
-    new cdk.App(),
+  const stack = new BackendStack(
+    new App(),
     "MyTestStack",
     backendStackConfig
   );
@@ -120,8 +120,8 @@ test("λ has permission to publish to sns ", () => {
 });
 
 test("λ has permission to read ssm parameter ", () => {
-  const stack = new Iac.BackendStack(
-    new cdk.App(),
+  const stack = new BackendStack(
+    new App(),
     "TestSSM",
     backendStackConfig
   );
@@ -143,8 +143,8 @@ test("λ has permission to read ssm parameter ", () => {
 });
 
 test("λ has permission to write to dynamoDB ", () => {
-  const stack = new Iac.BackendStack(
-    new cdk.App(),
+  const stack = new BackendStack(
+    new App(),
     "MyTestDynamoDBStack",
     backendStackConfig
   );
@@ -192,8 +192,8 @@ test("λ has permission to write to dynamoDB ", () => {
 });
 
 test("Stack has cloudwatch event rule", () => {
-  const stack = new Iac.BackendStack(
-    new cdk.App(),
+  const stack = new BackendStack(
+    new App(),
     "TestEvents",
     backendStackConfig
   );
