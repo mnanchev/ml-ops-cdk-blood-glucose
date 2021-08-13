@@ -1,16 +1,3 @@
-// import { CfnOutput, Construct, Duration, StackProps } from "@aws-cdk/core";
-// import { Code, Function, Handler, Runtime } from "@aws-cdk/aws-lambda";
-// import { Policy, PolicyStatement } from "@aws-cdk/aws-iam";
-// import { Topic } from "@aws-cdk/aws-sns";
-// import { ComputePlatform, ProfilingGroup } from "@aws-cdk/aws-codeguruprofiler";
-// import {
-//   EmailSubscription,
-//   SmsSubscription,
-// } from "@aws-cdk/aws-sns-subscriptions";
-// import { Rule, Schedule } from "@aws-cdk/aws-events";
-// import { LambdaFunction } from "@aws-cdk/aws-events-targets";
-// import { AttributeType, Table } from "@aws-cdk/aws-dynamodb";
-
 import {Policy, PolicyStatement} from "aws-cdk-lib/aws-iam";
 import {AttributeType, Table} from "aws-cdk-lib/aws-dynamodb";
 import {CfnOutput, Duration, StackProps} from "aws-cdk-lib";

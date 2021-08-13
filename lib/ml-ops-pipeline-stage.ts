@@ -1,9 +1,3 @@
-// import { Stage, Construct, StageProps } from "@aws-cdk/core";
-// import { BackendStack } from "./backend-stack";
-// import { StrictBuilder } from "builder-pattern";
-// import { BackendConfigDecorator } from "./1_backend/LambdaBackendConstruct";
-// import { Backend, emails, mobileNumbers } from "./StackConfigs";
-
 import {Backend, emails, mobileNumbers} from "./StackConfigs";
 import {BackendStack} from "./backend-stack";
 import {BackendConfigDecorator} from "./1_backend/LambdaBackendConstruct";

@@ -1,9 +1,3 @@
-// import * as cdk from "@aws-cdk/core";
-// import {
-//   BackendConfigDecorator,
-//   LambdaBackendConstruct,
-// } from "./1_backend/LambdaBackendConstruct";
-
 import {Stack} from "aws-cdk-lib";
 import {BackendConfigDecorator, LambdaBackendConstruct} from "./1_backend/LambdaBackendConstruct";
 import {Construct} from "constructs";
