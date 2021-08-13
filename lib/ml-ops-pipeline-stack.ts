@@ -1,13 +1,13 @@
 import { MlOpsPipelineStage } from "./ml-ops-pipeline-stage";
-import {Stack, StackProps} from "aws-cdk-lib";
-import {CdkPipeline, SimpleSynthAction} from "aws-cdk-lib/pipelines";
-import {CodeCommitSourceAction} from "aws-cdk-lib/aws-codepipeline-actions";
-import {Artifact} from "aws-cdk-lib/aws-codepipeline";
-import {Construct} from "constructs";
-import {Repository} from "aws-cdk-lib/aws-codecommit";
+import { Stack, StackProps } from "aws-cdk-lib";
+import { CdkPipeline, SimpleSynthAction } from "aws-cdk-lib/pipelines";
+import { CodeCommitSourceAction } from "aws-cdk-lib/aws-codepipeline-actions";
+import { Artifact } from "aws-cdk-lib/aws-codepipeline";
+import { Construct } from "constructs";
+import { Repository } from "aws-cdk-lib/aws-codecommit";
 
 export class MlOpsPipelineStack extends Stack {
-  constructor(scope: Construct, id: string, props?:StackProps) {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
     const pipelineName = "MlOpsPipeline";
     const ml_repo = new Repository(this, "MlOpsPipelineRepo", {

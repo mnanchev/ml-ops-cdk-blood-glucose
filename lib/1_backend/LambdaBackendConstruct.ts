@@ -1,13 +1,19 @@
-import {Policy, PolicyStatement} from "aws-cdk-lib/aws-iam";
-import {AttributeType, Table} from "aws-cdk-lib/aws-dynamodb";
-import {CfnOutput, Duration, StackProps} from "aws-cdk-lib";
-import {Code, Handler, Function, Runtime} from "aws-cdk-lib/aws-lambda";
-import {LambdaFunction} from "aws-cdk-lib/aws-events-targets";
-import {ComputePlatform, ProfilingGroup} from "aws-cdk-lib/aws-codeguruprofiler";
-import {EmailSubscription, SmsSubscription} from "aws-cdk-lib/aws-sns-subscriptions";
-import {Rule, Schedule} from "aws-cdk-lib/aws-events";
-import {Topic} from "aws-cdk-lib/aws-sns";
-import {Construct} from "constructs";
+import { Policy, PolicyStatement } from "aws-cdk-lib/aws-iam";
+import { AttributeType, Table } from "aws-cdk-lib/aws-dynamodb";
+import { CfnOutput, Duration, StackProps } from "aws-cdk-lib";
+import { Code, Handler, Function, Runtime } from "aws-cdk-lib/aws-lambda";
+import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
+import {
+  ComputePlatform,
+  ProfilingGroup,
+} from "aws-cdk-lib/aws-codeguruprofiler";
+import {
+  EmailSubscription,
+  SmsSubscription,
+} from "aws-cdk-lib/aws-sns-subscriptions";
+import { Rule, Schedule } from "aws-cdk-lib/aws-events";
+import { Topic } from "aws-cdk-lib/aws-sns";
+import { Construct } from "constructs";
 
 export interface BackendConfigDecorator extends StackProps {
   readonly codeLocation: string;

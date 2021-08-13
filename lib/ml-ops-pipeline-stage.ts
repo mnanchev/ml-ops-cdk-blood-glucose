@@ -1,9 +1,9 @@
-import {Backend, emails, mobileNumbers} from "./StackConfigs";
-import {BackendStack} from "./backend-stack";
-import {BackendConfigDecorator} from "./1_backend/LambdaBackendConstruct";
-import {Construct} from "constructs";
-import {StrictBuilder} from "builder-pattern";
-import {Stage, StageProps} from "aws-cdk-lib";
+import { Backend, emails, mobileNumbers } from "./StackConfigs";
+import { BackendStack } from "./backend-stack";
+import { BackendConfigDecorator } from "./1_backend/LambdaBackendConstruct";
+import { Construct } from "constructs";
+import { StrictBuilder } from "builder-pattern";
+import { Stage, StageProps } from "aws-cdk-lib";
 
 export class MlOpsPipelineStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {

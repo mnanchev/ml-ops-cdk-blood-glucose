@@ -6,8 +6,8 @@ import {
 import { StrictBuilder } from "builder-pattern";
 import { BackendConfigDecorator } from "../lib/1_backend/LambdaBackendConstruct";
 import { Backend, emails, mobileNumbers } from "../lib/StackConfigs";
-import {BackendStack}  from "../lib/backend-stack";
-import {App} from "aws-cdk-lib";
+import { BackendStack } from "../lib/backend-stack";
+import { App } from "aws-cdk-lib";
 
 const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .solution(Backend.solution)
@@ -22,11 +22,7 @@ const backendStackConfig = StrictBuilder<BackendConfigDecorator>()
   .build();
 
 test("λ has environment variables", () => {
-  const stack = new BackendStack(
-    new App(),
-    "MyTestStack",
-    backendStackConfig
-  );
+  const stack = new BackendStack(new App(), "MyTestStack", backendStackConfig);
   expectCDK(stack).to(
     haveResource("AWS::Lambda::Function", {
       Environment: {
@@ -96,11 +92,7 @@ test("λ has permission to post code guru profile", () => {
 });
 
 test("λ has permission to publish to sns ", () => {
-  const stack = new BackendStack(
-    new App(),
-    "MyTestStack",
-    backendStackConfig
-  );
+  const stack = new BackendStack(new App(), "MyTestStack", backendStackConfig);
   expectCDK(stack).to(
     haveResourceLike("AWS::IAM::Policy", {
       PolicyDocument: {
@@ -120,11 +112,7 @@ test("λ has permission to publish to sns ", () => {
 });
 
 test("λ has permission to read ssm parameter ", () => {
-  const stack = new BackendStack(
-    new App(),
-    "TestSSM",
-    backendStackConfig
-  );
+  const stack = new BackendStack(new App(), "TestSSM", backendStackConfig);
   expectCDK(stack).to(
     haveResourceLike("AWS::IAM::Policy", {
       PolicyDocument: {
@@ -192,10 +180,6 @@ test("λ has permission to write to dynamoDB ", () => {
 });
 
 test("Stack has cloudwatch event rule", () => {
-  const stack = new BackendStack(
-    new App(),
-    "TestEvents",
-    backendStackConfig
-  );
+  const stack = new BackendStack(new App(), "TestEvents", backendStackConfig);
   expectCDK(stack).to(haveResource("AWS::Events::Rule"));
 });
