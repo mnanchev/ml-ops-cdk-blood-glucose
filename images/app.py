@@ -18,7 +18,7 @@ from codeguru_profiler_agent import with_lambda_profiler
 SSM_CLIENT = client("ssm")
 SNS_CLIENT = client("sns")
 DYNAMO_DB_CLIENT = resource('dynamodb')
-CURRENT_DATETIME = ""
+LATEST_RECORD = []
 # Topic arn and profilingGroup
 
 TOPIC_ARN = environ["SNS"]
@@ -137,10 +137,10 @@ def clean_data(blood_glucose_dataset):
             COLUMN_BLOOD_GLUCOSE_TYPE)
     blood_glucose_dataset[COLUMNS[0]] = blood_glucose_dataset[
         COLUMNS[0]].str.replace(COLUMN_DATE_TIME_REPLACE_CHARACTER, '')
-    CURRENT_DATETIME = blood_glucose_dataset[COLUMNS[0]].iloc[-1]
-    print("CURRENT_DATETIME", CURRENT_DATETIME)
     blood_glucose_dataset[COLUMNS[0]] = to_datetime(
         blood_glucose_dataset[COLUMNS[0]], infer_datetime_format=True)
+    LATEST_RECORD[0] = blood_glucose_dataset[COLUMNS[0]].iloc[-1]
+    print("CURRENT_DATETIME", LATEST_RECORD[0])
     blood_glucose_dataset.replace(r'', NaN, inplace=True)
     blood_glucose_dataset.fillna(0, inplace=True)
     blood_glucose_time_series = down_sample(dataset=blood_glucose_dataset,
@@ -185,7 +185,6 @@ def handler(event, context):
     # pylint: disable=unused-argument
     concatenated_data_frame = get_latest_google_spreadsheet(
         GOOGLE_CLOUD_SPREADSHEETS)
-    print(concatenated_data_frame)
     data = clean_data(concatenated_data_frame).reset_index()
     data = array(data.BLOOD_GLUCOSE)
     cleaned_dataset = series_to_supervised(data.tolist(), n_out=3)
