@@ -203,5 +203,4 @@ def handler(event, context):
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
     print(result[1])
     print(type(result[1])
-    value1 = datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p')
     print(value)
