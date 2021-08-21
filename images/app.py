@@ -137,7 +137,7 @@ def clean_data(blood_glucose_dataset):
             COLUMN_BLOOD_GLUCOSE_TYPE)
     blood_glucose_dataset[COLUMNS[0]] = blood_glucose_dataset[
         COLUMNS[0]].str.replace(COLUMN_DATE_TIME_REPLACE_CHARACTER, '')
-    CURRENT_DATETIME = blood_glucose_dataset[COLUMNS[0]].index[-1]
+    CURRENT_DATETIME = blood_glucose_dataset[COLUMNS[0]][-1]
     print("CURRENT_DATETIME", CURRENT_DATETIME)
     blood_glucose_dataset[COLUMNS[0]] = to_datetime(
         blood_glucose_dataset[COLUMNS[0]], infer_datetime_format=True)
