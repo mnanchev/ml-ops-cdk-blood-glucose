@@ -138,13 +138,13 @@ def clean_data(blood_glucose_dataset):
         COLUMNS[0]].str.replace(COLUMN_DATE_TIME_REPLACE_CHARACTER, '')
     blood_glucose_dataset[COLUMNS[0]] = to_datetime(
         blood_glucose_dataset[COLUMNS[0]], infer_datetime_format=True)
-    self.time = blood_glucose_dataset[COLUMNS[0]].iloc[-1]
+    time = blood_glucose_dataset[COLUMNS[0]].iloc[-1]
     blood_glucose_dataset.replace(r'', NaN, inplace=True)
     blood_glucose_dataset.fillna(0, inplace=True)
     blood_glucose_time_series = down_sample(dataset=blood_glucose_dataset,
                                             column=COLUMNS[1],
                                             index=COLUMNS[0])
-    return blood_glucose_time_series
+    return [blood_glucose_time_series, time]
 
 
 def down_sample(dataset, index, column):
@@ -183,7 +183,8 @@ def handler(event, context):
     # pylint: disable=unused-argument
     concatenated_data_frame = get_latest_google_spreadsheet(
         GOOGLE_CLOUD_SPREADSHEETS)
-    data = clean_data(concatenated_data_frame).reset_index()
+    result = clean_data(concatenated_data_frame)
+    data = result[0].reset_index()
     data = array(data.BLOOD_GLUCOSE)
     cleaned_dataset = series_to_supervised(data.tolist(), n_out=3)
     last_prediction_data = cleaned_dataset.drop(["var1(t-1)"], axis=1).tail(1)
@@ -203,7 +204,7 @@ def handler(event, context):
     response = DYNAMO_DB_CLIENT.put_item(
         Item={
             'dateTime':
-            datetime.strptime(str(self.time), '%B %d, %Y %I:%M%p').strftime(
+            datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').strftime(
                 "%Y%m%d%H%M%S"),
             'bloodGlucose':
             db_current,
