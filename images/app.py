@@ -201,14 +201,11 @@ def handler(event, context):
     db_pred_lr = Decimal(str(round(lr_pred, 2)))
     db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
-    print("DATETIME",str(datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p')))
     response = DYNAMO_DB_CLIENT.put_item(
         Item={
             'dateTime':
-            datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').strftime(
-                "%Y%m%d%H%M%S"),
-            'bloodGlucose':
-            db_current,
+            f"{datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').year}{datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').month}{datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').day}{datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').hour}{datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p').minute}",
+            'bloodGlucose': db_current,
             'prediction': {
                 "linear_prediction": db_pred_lr,
                 "random_cut_forest_prediction": db_pred_rcf,
