@@ -4,7 +4,6 @@ predict blood glucose for next 30 minutes
 """
 from json import loads, dumps
 from os import environ
-from datetime import datetime
 from decimal import Decimal
 from boto3 import client, resource
 from gspread import authorize
@@ -201,8 +200,15 @@ def handler(event, context):
     db_pred_lr = Decimal(str(round(lr_pred, 2)))
     db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
-    print(result[1].day)
-    print(result[1].year)
-    print(result[1].month)
-    print(result[1].minute)
-    print(type(result[1]))
+    response = DYNAMO_DB_CLIENT.put_item(
+        Item={
+            'dateTime':
+            f"{result[1].year}{result[1].month}{result[1].day}{result[1].hour}{result[1].minute}",
+            'bloodGlucose': db_current,
+            'prediction': {
+                "linear_prediction": db_pred_lr,
+                "random_cut_forest_prediction": db_pred_rcf,
+                "average_prediction": db_ave
+            }
+        })
+    return response
