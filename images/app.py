@@ -203,4 +203,3 @@ def handler(event, context):
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
     print(result[1])
     print(type(result[1])
-    print(value)
