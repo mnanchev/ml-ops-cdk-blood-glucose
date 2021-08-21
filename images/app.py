@@ -203,7 +203,7 @@ def handler(event, context):
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
     response = DYNAMO_DB_CLIENT.put_item(
         Item={
-            'dateTime':str(datetime.strptime(str(LATEST_RECORD[0]), '%B %d, %Y %I:%M%p')),
+            'dateTime': datetime.strptime(str(LATEST_RECORD[0]), '%B %d, %Y %I:%M%p').strftime("%Y%m%d%H%M%S"),
             'bloodGlucose':
             db_current,
             'prediction': {
