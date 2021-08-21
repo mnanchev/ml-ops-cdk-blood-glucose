@@ -18,6 +18,7 @@ from codeguru_profiler_agent import with_lambda_profiler
 SSM_CLIENT = client("ssm")
 SNS_CLIENT = client("sns")
 DYNAMO_DB_CLIENT = resource('dynamodb')
+CURRENT_DATETIME = ""
 # Topic arn and profilingGroup
 
 TOPIC_ARN = environ["SNS"]
@@ -136,6 +137,8 @@ def clean_data(blood_glucose_dataset):
             COLUMN_BLOOD_GLUCOSE_TYPE)
     blood_glucose_dataset[COLUMNS[0]] = blood_glucose_dataset[
         COLUMNS[0]].str.replace(COLUMN_DATE_TIME_REPLACE_CHARACTER, '')
+    CURRENT_DATETIME = blood_glucose_dataset[COLUMNS[0]].index[-1]
+    print("CURRENT_DATETIME", CURRENT_DATETIME)
     blood_glucose_dataset[COLUMNS[0]] = to_datetime(
         blood_glucose_dataset[COLUMNS[0]], infer_datetime_format=True)
     blood_glucose_dataset.replace(r'', NaN, inplace=True)
