@@ -184,6 +184,7 @@ def handler(event, context):
         GOOGLE_CLOUD_SPREADSHEETS)
     data = clean_data(concatenated_data_frame).reset_index()
     data = array(data.BLOOD_GLUCOSE)
+    print(data)
     cleaned_dataset = series_to_supervised(data.tolist(), n_out=3)
     last_prediction_data = cleaned_dataset.drop(["var1(t-1)"], axis=1).tail(1)
     print("LAST_PREDICTION_DATA", last_prediction_data)
