@@ -201,6 +201,7 @@ def handler(event, context):
     db_pred_lr = Decimal(str(round(lr_pred, 2)))
     db_pred_rcf = Decimal(str(round(rcf_pred, 2)))
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
+    print("DATETIME",datetime.strptime(str(result[1]), '%B %d, %Y %I:%M%p'))
     response = DYNAMO_DB_CLIENT.put_item(
         Item={
             'dateTime':
