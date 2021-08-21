@@ -18,7 +18,6 @@ from codeguru_profiler_agent import with_lambda_profiler
 SSM_CLIENT = client("ssm")
 SNS_CLIENT = client("sns")
 DYNAMO_DB_CLIENT = resource('dynamodb')
-LATEST_RECORD = []
 # Topic arn and profilingGroup
 
 TOPIC_ARN = environ["SNS"]
@@ -139,7 +138,7 @@ def clean_data(blood_glucose_dataset):
         COLUMNS[0]].str.replace(COLUMN_DATE_TIME_REPLACE_CHARACTER, '')
     blood_glucose_dataset[COLUMNS[0]] = to_datetime(
         blood_glucose_dataset[COLUMNS[0]], infer_datetime_format=True)
-    LATEST_RECORD.append(blood_glucose_dataset[COLUMNS[0]].iloc[-1])
+    self.time = blood_glucose_dataset[COLUMNS[0]].iloc[-1]
     blood_glucose_dataset.replace(r'', NaN, inplace=True)
     blood_glucose_dataset.fillna(0, inplace=True)
     blood_glucose_time_series = down_sample(dataset=blood_glucose_dataset,
@@ -203,7 +202,9 @@ def handler(event, context):
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
     response = DYNAMO_DB_CLIENT.put_item(
         Item={
-            'dateTime': datetime.strptime(str(LATEST_RECORD[0]), '%B %d, %Y %I:%M%p').strftime("%Y%m%d%H%M%S"),
+            'dateTime':
+            datetime.strptime(str(self.time), '%B %d, %Y %I:%M%p').strftime(
+                "%Y%m%d%H%M%S"),
             'bloodGlucose':
             db_current,
             'prediction': {
