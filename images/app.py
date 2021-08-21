@@ -139,8 +139,7 @@ def clean_data(blood_glucose_dataset):
         COLUMNS[0]].str.replace(COLUMN_DATE_TIME_REPLACE_CHARACTER, '')
     blood_glucose_dataset[COLUMNS[0]] = to_datetime(
         blood_glucose_dataset[COLUMNS[0]], infer_datetime_format=True)
-    LATEST_RECORD[0] = blood_glucose_dataset[COLUMNS[0]].iloc[-1]
-    print("CURRENT_DATETIME", LATEST_RECORD[0])
+    LATEST_RECORD.append( blood_glucose_dataset[COLUMNS[0]].iloc[-1])
     blood_glucose_dataset.replace(r'', NaN, inplace=True)
     blood_glucose_dataset.fillna(0, inplace=True)
     blood_glucose_time_series = down_sample(dataset=blood_glucose_dataset,
@@ -204,7 +203,7 @@ def handler(event, context):
     db_ave = Decimal(str(round(((rcf_pred + lr_pred) / 2), 2)))
     response = DYNAMO_DB_CLIENT.put_item(
         Item={
-            'dateTime': datetime.now().strftime("%Y%m%d%H%M%S"),
+            'dateTime': datetime.strptime(LATEST_RECORD[0], '%b %d, %Y %I:%M%p').strftime("%Y%m%d%H%M%S"),
             'bloodGlucose': db_current,
             'prediction': {
                 "linear_prediction": db_pred_lr,
